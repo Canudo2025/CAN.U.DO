@@ -101,8 +101,14 @@
             <div class="mb-3">
                 <input type="email" id="player-email" placeholder="O seu Melhor Email" class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent" required>
             </div>
-            <div class="mb-6">
+            <div class="mb-4"> 
                 <input type="text" id="player-instagram" placeholder="Seu @ do Instagram (opcional)" class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent">
+            </div>
+            <div class="mb-6 flex items-center justify-center"> 
+                <input type="checkbox" id="marketing-consent" class="h-4 w-4 text-green-600 border-gray-300 rounded focus:ring-green-500">
+                <label for="marketing-consent" class="ml-2 block text-sm text-gray-700">
+                    Aceito receber novidades e ofertas da CAN.U.DO.
+                </label>
             </div>
             <button id="start-button" class="w-full sm:w-auto bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-8 rounded-lg shadow-md hover:shadow-lg transition duration-300 text-lg">
                 Iniciar Quiz e Concorrer!
@@ -121,7 +127,7 @@
                 </div>
             </div>
             <div class="mb-4">
-                 <p class="text-sm text-center text-orange-600 font-medium">Tempo restante para bónus:</p>
+                 <p class="text-sm text-center text-orange-600 font-medium">Tempo para bónus máximo (60s):</p> 
                 <div class="w-full bg-gray-200 rounded-full h-3.5 mt-1">
                     <div id="timer-bar" class="h-3.5 rounded-full timer-bar-fill" style="width: 100%;"></div>
                 </div>
@@ -165,6 +171,7 @@
                             <th>Pos.</th>
                             <th>Nome</th>
                             <th>Pontuação</th>
+                            <th>Tempo Total</th> 
                             <th>Data</th>
                         </tr>
                     </thead>
@@ -206,8 +213,8 @@
         const analytics = getAnalytics(app); 
         const rankingsCollectionRef = collection(db, 'rankings'); 
 
-        // --- DADOS DO QUIZ ATUALIZADOS ---
-        const quizData = [
+        // --- DADOS DO QUIZ ---
+         const quizData = [
             {
                 question: "O que é greenwashing?",
                 options: [
@@ -219,7 +226,7 @@
                 answer: "Prática de empresas que exageram ou falsamente promovem suas ações de sustentabilidade."
             },
             {
-                question: "Quantos copos plásticos evitamos por ano ao substituí-lo por um copo reutilizável da Can.u.do (considerando uso diário em dias úteis)?",
+                question: "Quantos copos plásticos evitamos por ano ao substituí-lo por um copo reutilizável da Can.u.do?",
                 options: [
                     "Cerca de 800 copos",
                     "Cerca de 1200 copos",
@@ -275,9 +282,9 @@
             },
             {
                 question: "Qual o significado geral dos '7 R's' da sustentabilidade?",
-                options: [
-                    "Um conjunto de ações como Repensar, Recusar, Reduzir, Reparar, Reutilizar, Reinserir (Reciclar) e Responsabilizar-se.",
+                options: [   
                     "Sete regras para investimentos financeiros em empresas verdes.",
+                    "Um conjunto de ações como Repensar, Recusar, Reduzir, Reparar, Reutilizar, Reinserir (Reciclar) e Responsabilizar-se.",
                     "Sete rios mais importantes a serem despoluídos no mundo.",
                     "Sete relatórios anuais sobre o clima."
                 ],
@@ -296,10 +303,10 @@
             {
                 question: "Qual das alternativas melhor descreve o impacto dos microplásticos na cadeia alimentar?",
                 options: [
-                    "São ingeridos por organismos marinhos, acumulando-se e podendo chegar aos humanos.",
                     "Servem como nutrientes para algas marinhas.",
                     "São rapidamente decompostos e eliminados pelos animais.",
-                    "Afetam apenas animais de grande porte."
+                    "Afetam apenas animais de grande porte.",
+                    "São ingeridos por organismos marinhos, acumulando-se e podendo chegar aos humanos."
                 ],
                 answer: "São ingeridos por organismos marinhos, acumulando-se e podendo chegar aos humanos."
             },
@@ -326,8 +333,8 @@
             {
                 question: "O que são microplásticos e onde predominantemente os encontramos?",
                 options: [
-                    "Pequenas partículas de plástico (<5mm), encontradas em oceanos, rios, solo, ar e até em alimentos e água potável.",
                     "Um tipo de plástico biodegradável usado em embalagens.",
+                    "Pequenas partículas de plástico (<5mm), encontradas em oceanos, rios, solo, ar e até em alimentos e água potável.",
                     "Plásticos visíveis a olho nu flutuando nos oceanos.",
                     "Componentes eletrônicos de tamanho micro."
                 ],
@@ -346,9 +353,9 @@
             {
                 question: "Carbono neutro - qual a melhor definição e exemplo que se encaixa no conceito?",
                 options: [
-                    "Emitir a mesma quantidade de carbono que se consegue compensar (ex: plantio de árvores, energias renováveis).",
                     "Não emitir nenhum tipo de gás de efeito estufa em nenhuma atividade.",
                     "Utilizar apenas carros elétricos em uma cidade.",
+                    "Emitir a mesma quantidade de carbono que se consegue compensar (ex: plantio de árvores, energias renováveis).",
                     "Um selo dado a produtos que não usam carbono em sua composição química."
                 ],
                 answer: "Emitir a mesma quantidade de carbono que se consegue compensar (ex: plantio de árvores, energias renováveis)."
@@ -366,29 +373,29 @@
             {
                 question: "Qual o papel fundamental das abelhas no equilíbrio ambiental?",
                 options: [
-                    "Polinização de plantas, essencial para a produção de alimentos e manutenção da biodiversidade.",
                     "Produção de mel apenas para consumo humano.",
                     "Controle de pragas em plantações de forma natural.",
+                    "Polinização de plantas, essencial para a produção de alimentos e manutenção da biodiversidade.",
                     "Aeração do solo em grandes áreas."
                 ],
                 answer: "Polinização de plantas, essencial para a produção de alimentos e manutenção da biodiversidade."
             },
             {
                 question: "O que é o conceito de 'pegada ecológica'?",
-                options: [
-                    "Medida da quantidade de recursos naturais que utilizamos versus a capacidade do planeta de regenerá-los.",
+                options: [  
                     "A marca que deixamos ao caminhar em trilhas na natureza.",
                     "O impacto financeiro total de ações sustentáveis de uma empresa.",
-                    "A quantidade de lixo reciclável que uma pessoa produz anualmente."
+                    "A quantidade de lixo reciclável que uma pessoa produz anualmente.",
+                    "Medida da quantidade de recursos naturais que utilizamos versus a capacidade do planeta de regenerá-los."
                 ],
                 answer: "Medida da quantidade de recursos naturais que utilizamos versus a capacidade do planeta de regenerá-los."
             },
             {
                 question: "Qual o significado do termo 'upcycling' e como podemos associar essa prática a um hábito sustentável?",
                 options: [
-                    "Transformar resíduos em novos produtos de maior valor, reduzindo descarte e uso de nova matéria-prima.",
                     "Reciclar materiais transformando-os em produtos de menor valor agregado.",
                     "Descartar produtos eletrônicos de forma correta em postos de coleta.",
+                    "Transformar resíduos em novos produtos de maior valor, reduzindo descarte e uso de nova matéria-prima.",
                     "Comprar apenas produtos feitos de material 100% reciclado."
                 ],
                 answer: "Transformar resíduos em novos produtos de maior valor, reduzindo descarte e uso de nova matéria-prima."
@@ -413,6 +420,7 @@
         const playerNameInput = document.getElementById('player-name');
         const playerEmailInput = document.getElementById('player-email');
         const playerInstagramInput = document.getElementById('player-instagram');
+        const marketingConsentCheckbox = document.getElementById('marketing-consent'); 
         const startButton = document.getElementById('start-button');
         const startError = document.getElementById('start-error');
         
@@ -437,8 +445,8 @@
         const rankingTableBody = document.getElementById('ranking-body');
         const noRankingDataP = document.getElementById('no-ranking-data');
 
-        const MAX_QUESTION_TIME_SECONDS = 40; 
-        const BONUS_TIME_FAST_SECONDS = 20; 
+        const MAX_QUESTION_TIME_SECONDS = 60; 
+        const QUIZ_STATE_KEY_PREFIX = 'canudoQuizState_';
 
         let currentQuestionIndex = 0;
         let score = 0;
@@ -446,21 +454,72 @@
         let currentPlayerName = '';
         let currentPlayerEmail = '';
         let currentPlayerInstagram = '';
+        let currentPlayerMarketingConsent = false; 
+        let quizStartTime; 
+        let totalQuizTimeMs = 0; 
 
         let questionStartTime;
         let questionTimerInterval;
         let questionTimeRemaining;
         let selectedOptionButton = null;
 
-        async function saveRankingToFirestore(name, email, instagram, score) {
+        function getQuizStateKey(email) {
+            return `${QUIZ_STATE_KEY_PREFIX}${email}`;
+        }
+
+        function saveQuizState() {
+            if (!currentPlayerEmail) return; 
+            const quizState = {
+                name: currentPlayerName,
+                email: currentPlayerEmail,
+                instagram: currentPlayerInstagram,
+                marketingConsent: currentPlayerMarketingConsent, 
+                currentQuestionIndex: currentQuestionIndex,
+                score: score,
+                userAnswers: userAnswers,
+                quizStartTime: quizStartTime,
+            };
+            localStorage.setItem(getQuizStateKey(currentPlayerEmail), JSON.stringify(quizState));
+            console.log("DEBUG: Estado do quiz salvo no localStorage para", currentPlayerEmail);
+        }
+
+        function loadQuizState(email) {
+            const savedStateJSON = localStorage.getItem(getQuizStateKey(email));
+            if (savedStateJSON) {
+                console.log("DEBUG: Estado do quiz encontrado no localStorage para", email);
+                return JSON.parse(savedStateJSON);
+            }
+            console.log("DEBUG: Nenhum estado do quiz encontrado no localStorage para", email);
+            return null;
+        }
+
+        function clearQuizState(email) {
+            if (!email) return;
+            localStorage.removeItem(getQuizStateKey(email));
+            console.log("DEBUG: Estado do quiz limpo do localStorage para", email);
+        }
+
+
+        async function saveRankingToFirestore(name, email, instagram, marketingConsent, currentScore, totalTime) { 
             const playerData = {
                 name: name,
                 email: email,
-                instagram: instagram || null,
-                score: score,
+                instagram: instagram || null, 
+                marketingConsent: marketingConsent, 
+                score: Number(currentScore), 
+                totalQuizTimeMs: Number(totalTime), 
                 date: new Date().toLocaleDateString('pt-BR'),
                 timestamp: serverTimestamp() 
             };
+            console.log("DEBUG: Tentando salvar no Firestore:", JSON.stringify(playerData, null, 2));
+            console.log("DEBUG: Tipos de dados para salvar:");
+            for (const key in playerData) {
+                if (playerData.hasOwnProperty(key)) {
+                    console.log(`DEBUG: ${key}: ${playerData[key]} (tipo: ${typeof playerData[key]})`);
+                }
+            }
+            console.log("DEBUG: timestamp (objeto FieldValue):", playerData.timestamp);
+
 
             try {
                 const q = query(rankingsCollectionRef, where('email', '==', email), limit(1));
@@ -469,8 +528,15 @@
                 if (!querySnapshot.empty) {
                     const docId = querySnapshot.docs[0].id;
                     const docRef = doc(db, "rankings", docId);
-                    await setDoc(docRef, playerData, { merge: true }); 
-                    console.log("Ranking atualizado no Firestore para:", email);
+                    const existingData = querySnapshot.docs[0].data();
+                    if (playerData.score > existingData.score || 
+                        (playerData.score === existingData.score && playerData.totalQuizTimeMs < existingData.totalQuizTimeMs) ||
+                        playerData.marketingConsent !== existingData.marketingConsent ) {
+                        await setDoc(docRef, playerData, { merge: true }); 
+                        console.log("Ranking atualizado no Firestore para:", email);
+                    } else {
+                        console.log("Pontuação existente é melhor ou igual com tempo melhor/igual e consentimento igual. Nenhum update para:", email);
+                    }
                 } else {
                     await addDoc(rankingsCollectionRef, playerData);
                     console.log("Novo ranking salvo no Firestore para:", email);
@@ -499,6 +565,7 @@
             currentPlayerName = playerNameInput.value.trim();
             currentPlayerEmail = playerEmailInput.value.trim();
             currentPlayerInstagram = playerInstagramInput.value.trim();
+            currentPlayerMarketingConsent = marketingConsentCheckbox.checked; 
             startError.textContent = '';
 
             if (!currentPlayerName || !currentPlayerEmail) {
@@ -513,12 +580,52 @@
                 currentPlayerInstagram = '@' + currentPlayerInstagram;
             }
 
-            const existingPlayer = await checkIfPlayerPlayedInFirestore(currentPlayerEmail); 
-            if (existingPlayer) {
-                alert(`Olá ${existingPlayer.name}! Parece que você já participou deste quiz e a sua pontuação foi ${existingPlayer.score}. A sua participação já está registada para concorrer aos prémios! Você será direcionado(a) para o ranking.`);
+            const completedPlayerEntry = await checkIfPlayerPlayedInFirestore(currentPlayerEmail); 
+            if (completedPlayerEntry) {
+                let existingPlayerTime = completedPlayerEntry.totalQuizTimeMs ? (completedPlayerEntry.totalQuizTimeMs / 1000).toFixed(2) + "s" : "N/A";
+                alert(`Olá ${completedPlayerEntry.name}! Parece que você já completou este quiz e a sua pontuação foi ${completedPlayerEntry.score} (tempo: ${existingPlayerTime}). A sua participação já está registada! Você será direcionado(a) para o ranking.`);
+                if (completedPlayerEntry.marketingConsent !== currentPlayerMarketingConsent) {
+                    await saveRankingToFirestore( 
+                        completedPlayerEntry.name, 
+                        completedPlayerEntry.email, 
+                        completedPlayerEntry.instagram, 
+                        currentPlayerMarketingConsent, 
+                        completedPlayerEntry.score, 
+                        completedPlayerEntry.totalQuizTimeMs
+                    );
+                }
                 await displayRankingScreen(true, currentPlayerEmail); 
+                return; 
+            }
+            
+            const inProgressQuizState = loadQuizState(currentPlayerEmail);
+            if (inProgressQuizState) {
+                console.log("DEBUG: Continuando quiz para", currentPlayerEmail);
+                currentPlayerName = inProgressQuizState.name; 
+                currentPlayerInstagram = inProgressQuizState.instagram; 
+                currentPlayerMarketingConsent = inProgressQuizState.marketingConsent; 
+                currentQuestionIndex = inProgressQuizState.currentQuestionIndex;
+                score = inProgressQuizState.score;
+                userAnswers = inProgressQuizState.userAnswers;
+                quizStartTime = inProgressQuizState.quizStartTime; 
+                
+                playerNameInput.value = currentPlayerName;
+                playerInstagramInput.value = currentPlayerInstagram;
+                marketingConsentCheckbox.checked = currentPlayerMarketingConsent; 
+
+
+                startScreen.classList.add('hidden');
+                resultsScreen.classList.add('hidden');
+                rankingScreen.classList.add('hidden');
+                questionScreen.classList.remove('hidden');
+                
+                scoreDisplay.textContent = score;
+                totalQuestionsDisplay.textContent = quizData.length;
+                nextButton.textContent = 'Confirmar e Próxima';
+                showQuestion(); 
             } else {
-                startQuiz();
+                console.log("DEBUG: Iniciando novo quiz para", currentPlayerEmail);
+                startQuiz(); 
             }
         });
 
@@ -538,6 +645,7 @@
             playerNameInput.value = '';
             playerEmailInput.value = '';
             playerInstagramInput.value = '';
+            marketingConsentCheckbox.checked = false; 
             startError.textContent = '';
         }
         
@@ -546,7 +654,7 @@
             return re.test(String(email).toLowerCase());
         }
 
-        function startQuiz() {
+        function startQuiz() { 
             startScreen.classList.add('hidden');
             resultsScreen.classList.add('hidden');
             rankingScreen.classList.add('hidden');
@@ -555,15 +663,19 @@
             currentQuestionIndex = 0;
             score = 0;
             userAnswers = [];
+            quizStartTime = Date.now(); 
+            totalQuizTimeMs = 0; 
             scoreDisplay.textContent = score;
             totalQuestionsDisplay.textContent = quizData.length;
             nextButton.textContent = 'Confirmar e Próxima';
+
+            saveQuizState(); 
             showQuestion();
         }
 
         function startQuestionTimer() {
-            questionTimeRemaining = MAX_QUESTION_TIME_SECONDS;
-            questionStartTime = Date.now();
+            questionTimeRemaining = MAX_QUESTION_TIME_SECONDS; 
+            questionStartTime = Date.now(); 
             timerBar.style.width = '100%';
             timerBar.style.backgroundColor = '#F59E0B'; 
 
@@ -576,16 +688,17 @@
                 if (widthPercentage < 0) widthPercentage = 0;
                 timerBar.style.width = `${widthPercentage}%`;
 
-                if (questionTimeRemaining <= BONUS_TIME_FAST_SECONDS / 2) { 
+                if (questionTimeRemaining <= 15) { 
                      timerBar.style.backgroundColor = '#EF4444'; 
-                } else if (questionTimeRemaining <= MAX_QUESTION_TIME_SECONDS / 2) { 
+                } else if (questionTimeRemaining <= 30) { 
                      timerBar.style.backgroundColor = '#FCD34D'; 
                 }
+
 
                 if (questionTimeRemaining <= 0) {
                     clearInterval(questionTimerInterval);
                     if (!selectedOptionButton) { 
-                         handleOptionSelection(false, quizData[currentQuestionIndex].answer, MAX_QUESTION_TIME_SECONDS + 1); 
+                         handleOptionSelection(false, quizData[currentQuestionIndex].answer, MAX_QUESTION_TIME_SECONDS); 
                          handleNextQuestionLogic(); 
                     }
                 }
@@ -598,7 +711,7 @@
             questionText.textContent = currentQuestion.question;
             questionNumberDisplay.textContent = currentQuestionIndex + 1;
             updateProgressBar();
-            startQuestionTimer();
+            startQuestionTimer(); 
 
             currentQuestion.options.forEach(optionText => {
                 const button = document.createElement('button');
@@ -620,22 +733,18 @@
         
         function handleOptionSelection(isCorrect, correctAnswerText, timeTakenSeconds) { 
             let questionPoints = 0;
-            let bonusPoints = 0;
+            let bonusPoints = 0; 
             let currentBonusFeedback = "";
 
+            const secondsSpent = Math.floor(timeTakenSeconds); 
+
             if (isCorrect) {
-                questionPoints = 10; 
-                if (timeTakenSeconds < BONUS_TIME_FAST_SECONDS) {
-                    bonusPoints = 10; 
-                    currentBonusFeedback = `Correto! +${bonusPoints} pts de bónus (super rápido!)`;
-                } else if (timeTakenSeconds < MAX_QUESTION_TIME_SECONDS) {
-                    bonusPoints = 5; 
-                    currentBonusFeedback = `Correto! +${bonusPoints} pts de bónus (rápido!)`;
-                } else {
-                     currentBonusFeedback = "Correto! Sem bónus de tempo.";
-                }
+                questionPoints = 100; 
+                bonusPoints = Math.max(0, MAX_QUESTION_TIME_SECONDS - secondsSpent); 
+                currentBonusFeedback = `Correto! +${bonusPoints} pts de bónus (tempo: ${secondsSpent}s).`;
             } else {
                  currentBonusFeedback = selectedOptionButton ? "Incorreto." : "Tempo esgotado!";
+                 bonusPoints = 0; 
             }
             
             score += questionPoints + bonusPoints;
@@ -647,7 +756,7 @@
                 selected: selectedOptionButton ? selectedOptionButton.textContent : "Tempo esgotado",
                 correct: correctAnswerText, 
                 isCorrect: isCorrect,
-                pointsEarned: questionPoints + bonusPoints
+                pointsEarned: questionPoints + bonusPoints 
             });
         }
 
@@ -668,7 +777,7 @@
         
         function handleNextQuestion() {
             clearInterval(questionTimerInterval); 
-            const timeTakenSeconds = (Date.now() - questionStartTime) / 1000;
+            const timeTakenForQuestionSeconds = (Date.now() - questionStartTime) / 1000;
 
             if (!selectedOptionButton && questionTimeRemaining > 0) { 
                 bonusFeedback.textContent = "Por favor, selecione uma opção antes de confirmar.";
@@ -680,7 +789,7 @@
             const selectedAnswerText = selectedOptionButton ? selectedOptionButton.textContent : null; 
             const isCorrect = selectedAnswerText === currentQuestion.answer;
             
-            handleOptionSelection(isCorrect, currentQuestion.answer, timeTakenSeconds); 
+            handleOptionSelection(isCorrect, currentQuestion.answer, timeTakenForQuestionSeconds); 
 
             Array.from(optionsContainer.children).forEach(button => {
                 button.disabled = true;
@@ -716,11 +825,13 @@
         function handleNextQuestionLogic() { 
             currentQuestionIndex++;
             if (currentQuestionIndex < quizData.length) {
+                saveQuizState(); 
                 setTimeout(() => {
                     showQuestion();
                 }, 1800); 
             } else {
                 progressBar.style.width = '100%'; 
+                totalQuizTimeMs = Date.now() - quizStartTime; 
                 setTimeout(() => {
                     showResults(); 
                 }, 1800);
@@ -741,13 +852,18 @@
             resultPlayerName.textContent = currentPlayerName;
             finalScoreDisplay.textContent = `${score}`;
             
-            await saveRankingToFirestore(currentPlayerName, currentPlayerEmail, currentPlayerInstagram, score); 
+            await saveRankingToFirestore(currentPlayerName, currentPlayerEmail, currentPlayerInstagram, currentPlayerMarketingConsent, score, totalQuizTimeMs); 
+            clearQuizState(currentPlayerEmail); 
 
             let message = "";
-            const maxPossibleScore = quizData.length * (10 + 10); 
-            const percentageOfMax = (score / maxPossibleScore) * 100;
+            const maxPossibleBaseScore = quizData.length * 100;
+            const maxPossibleBonusScore = quizData.length * MAX_QUESTION_TIME_SECONDS; 
+            const maxPossibleTotalScore = maxPossibleBaseScore + maxPossibleBonusScore;
 
-            if (score === maxPossibleScore) {
+            const percentageOfMax = (score / maxPossibleTotalScore) * 100;
+
+
+            if (score === maxPossibleTotalScore) { 
                 message = "PERFEITO! Você gabaritou com bónus máximos! Um verdadeiro expert em sustentabilidade!";
             } else if (percentageOfMax >= 75) {
                 message = "Excelente! A sua pontuação é impressionante. Você entende muito de sustentabilidade!";
@@ -796,12 +912,18 @@
             resultsScreen.classList.add('hidden');
             rankingScreen.classList.remove('hidden');
 
-            rankingTableBody.innerHTML = '<tr><td colspan="4" class="text-center py-4">A carregar ranking...</td></tr>';
+            rankingTableBody.innerHTML = '<tr><td colspan="5" class="text-center py-4">A carregar ranking...</td></tr>'; 
             noRankingDataP.classList.add('hidden');
             document.getElementById('ranking-table-display').classList.remove('hidden');
 
             try {
-                const q = query(rankingsCollectionRef, orderBy('score', 'desc'), orderBy('timestamp', 'asc'), limit(100));
+                const q = query(
+                    rankingsCollectionRef, 
+                    orderBy('score', 'desc'), 
+                    orderBy('totalQuizTimeMs', 'asc'), 
+                    orderBy('timestamp', 'asc'), 
+                    limit(100)
+                );
                 const querySnapshot = await getDocs(q);
 
                 rankingTableBody.innerHTML = ''; 
@@ -810,7 +932,6 @@
                     noRankingDataP.classList.remove('hidden');
                     document.getElementById('ranking-table-display').classList.add('hidden');
                 } else {
-                    // Correção: Iterar sobre querySnapshot.docs para obter o index
                     querySnapshot.docs.forEach((doc, index) => { 
                         const player = doc.data();
                         const row = rankingTableBody.insertRow();
@@ -820,12 +941,14 @@
                         row.insertCell().textContent = (index + 1) + "º"; 
                         row.insertCell().textContent = player.name;
                         row.insertCell().textContent = player.score;
+                        const totalTimeSeconds = player.totalQuizTimeMs ? (player.totalQuizTimeMs / 1000).toFixed(2) + "s" : "-";
+                        row.insertCell().textContent = totalTimeSeconds;
                         row.insertCell().textContent = player.date;
                     });
                 }
             } catch (error) {
                 console.error("Erro ao carregar ranking do Firestore: ", error);
-                rankingTableBody.innerHTML = '<tr><td colspan="4" class="text-center py-4 text-red-500">Erro ao carregar o ranking.</td></tr>';
+                rankingTableBody.innerHTML = '<tr><td colspan="5" class="text-center py-4 text-red-500">Erro ao carregar o ranking.</td></tr>'; 
             }
         }
 
