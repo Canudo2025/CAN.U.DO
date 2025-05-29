@@ -28,25 +28,25 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
         .selected-option-highlight {
-            border-color: #3B82F6 !important; /* Azul (Tailwind blue-500) */
+            border-color: #3B82F6 !important; 
             border-width: 2px !important;
         }
         .answer-feedback-correct {
-            background-color: #10B981 !important; /* Verde (Tailwind green-600) */
+            background-color: #10B981 !important; 
             color: white !important;
-            border-color: #059669 !important; /* Verde mais escuro (Tailwind green-700) */
+            border-color: #059669 !important; 
             border-width: 2px !important;
         }
         .answer-feedback-incorrect {
-            background-color: #EF4444 !important; /* Vermelho (Tailwind red-500) */
+            background-color: #EF4444 !important; 
             color: white !important;
-            border-color: #DC2626 !important; /* Vermelho mais escuro (Tailwind red-600) */
+            border-color: #DC2626 !important; 
             border-width: 2px !important;
         }
         .answer-feedback-show-correct {
-            background-color: #D1FAE5 !important; /* Verde bem claro (Tailwind green-100) */
-            color: #065F46 !important; /* Texto verde escuro (Tailwind green-800) */
-            border-color: #10B981 !important; /* Borda verde (Tailwind green-600) */
+            background-color: #D1FAE5 !important; 
+            color: #065F46 !important; 
+            border-color: #10B981 !important; 
             border-width: 2px !important;
             font-weight: 600;
         }
@@ -81,6 +81,29 @@
             background-color: #A7F3D0 !important;
             font-weight: bold;
         }
+        /* Estilo para os botões de rádio de plataforma */
+        .platform-radio-label {
+            padding: 0.5rem 1rem;
+            border: 1px solid #D1D5DB; /* gray-300 */
+            border-radius: 0.375rem; /* rounded-md */
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            margin: 0 0.25rem; /* mx-1 */
+        }
+        .platform-radio-label:hover {
+            background-color: #F3F4F6; /* gray-100 */
+        }
+        input[type="radio"]:checked + .platform-radio-label {
+            background-color: #3B82F6; /* blue-500 */
+            color: white;
+            border-color: #2563EB; /* blue-600 */
+        }
+         input[type="radio"].hidden-radio { /* Esconde o input de rádio padrão */
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
     </style>
 </head>
 <body class="bg-green-50 flex flex-col items-center justify-center min-h-screen p-4">
@@ -88,21 +111,32 @@
     <div id="quiz-container" class="bg-white p-6 sm:p-8 rounded-xl shadow-2xl w-full max-w-2xl">
         <header class="mb-6 text-center">
             <h1 class="text-3xl sm:text-4xl font-bold brand-gradient">CAN.U.DO</h1>
-            <p class="text-lg text-green-700">Quiz Premiado de Sustentabilidade</p>
+            <p class="text-lg text-green-700">Quiz Premiado de Sustentabilidade - Jornada de 5 Dias</p>
         </header>
 
         <div id="start-screen" class="text-center">
             <img src="https://placehold.co/300x150/A0D2DB/333333?text=Participe+e+Concorra!&font=inter" alt="Imagem de boas-vindas ao quiz CAN.U.DO" class="mx-auto mb-4 rounded-lg shadow-md">
             <p class="text-gray-700 mb-2 text-lg">Insira os seus dados para testar os seus conhecimentos e concorrer!</p>
-            <p class="text-sm text-blue-600 font-semibold mb-4">Ao participar, você concorre a prémios incríveis da CAN.U.DO!</p>
+            <p class="text-sm text-blue-600 font-semibold mb-4">Acumule pontos ao longo de 5 dias de quiz!</p>
             <div class="mb-3">
                 <input type="text" id="player-name" placeholder="O seu Nome Completo" class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent" required>
             </div>
             <div class="mb-3">
                 <input type="email" id="player-email" placeholder="O seu Melhor Email" class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent" required>
             </div>
+            
+            <div class="mb-3">
+                <p class="text-sm text-gray-600 mb-1">Onde você ficou sabendo do quiz?</p>
+                <div class="flex justify-center space-x-2">
+                    <input type="radio" name="referral_platform" id="platform-instagram" value="Instagram" class="hidden-radio">
+                    <label for="platform-instagram" class="platform-radio-label">Instagram</label>
+                    
+                    <input type="radio" name="referral_platform" id="platform-tiktok" value="TikTok" class="hidden-radio">
+                    <label for="platform-tiktok" class="platform-radio-label">TikTok</label>
+                </div>
+            </div>
             <div class="mb-4"> 
-                <input type="text" id="player-instagram" placeholder="Seu @ do Instagram (opcional)" class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                <input type="text" id="referral-handle" placeholder="Seu @ da rede social (opcional)" class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent">
             </div>
             <div class="mb-6 flex items-center justify-center"> 
                 <input type="checkbox" id="marketing-consent" class="h-4 w-4 text-green-600 border-gray-300 rounded focus:ring-green-500">
@@ -111,16 +145,20 @@
                 </label>
             </div>
             <button id="start-button" class="w-full sm:w-auto bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-8 rounded-lg shadow-md hover:shadow-lg transition duration-300 text-lg">
-                Iniciar Quiz e Concorrer!
+                Iniciar Quiz do Dia!
             </button>
             <p id="start-error" class="text-red-500 text-sm mt-2"></p>
+            <p id="quiz-day-info" class="text-green-700 font-semibold text-md mt-3"></p>
         </div>
 
         <div id="question-screen" class="hidden">
+            <div class="mb-1">
+                <p id="current-quiz-day-display" class="text-center text-lg font-semibold text-green-700"></p>
+            </div>
             <div class="mb-2">
                 <div class="flex justify-between items-center mb-1">
                     <span class="text-sm font-semibold text-green-600">Questão <span id="question-number"></span> de <span id="total-questions"></span></span>
-                    <span class="text-sm font-semibold text-green-600">Pontos: <span id="score">0</span></span>
+                    <span class="text-sm font-semibold text-green-600">Pontos (Dia): <span id="score">0</span></span>
                 </div>
                 <div class="w-full bg-gray-200 rounded-full h-2.5">
                     <div id="progress-bar" class="bg-green-500 h-2.5 rounded-full progress-bar-fill" style="width: 0%"></div>
@@ -144,35 +182,42 @@
         </div>
 
         <div id="results-screen" class="hidden text-center">
-            <img src="https://placehold.co/300x150/90EE90/333333?text=Quiz+Finalizado!&font=inter" alt="Imagem de finalização do quiz CAN.U.DO" class="mx-auto mb-4 rounded-lg shadow-md">
-            <h2 class="text-3xl font-bold text-green-700 mb-2">Quiz Concluído, <span id="result-player-name"></span>!</h2>
-            <p class="text-gray-700 text-xl mb-1">A sua pontuação final é:</p>
+            <img src="https://placehold.co/300x150/90EE90/333333?text=Quiz+do+Dia+Finalizado!&font=inter" alt="Imagem de finalização do quiz CAN.U.DO" class="mx-auto mb-4 rounded-lg shadow-md">
+            <h2 class="text-3xl font-bold text-green-700 mb-2">Quiz do Dia <span id="results-quiz-day"></span> Concluído, <span id="result-player-name"></span>!</h2>
+            <p class="text-gray-700 text-xl mb-1">Sua pontuação neste dia foi: <span id="daily-score-display" class="font-bold text-green-600"></span></p>
+            <p class="text-gray-700 text-xl mb-1">Seu tempo neste dia foi: <span id="daily-time-display" class="font-bold text-green-600"></span></p>
+            <p class="text-gray-700 text-xl mt-3 mb-1">Sua pontuação cumulativa é:</p>
             <p id="final-score" class="text-5xl font-bold text-green-600 mb-4"></p>
+            
+            <div class="my-6 p-4 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 rounded-md">
+                <p class="font-bold">Parabéns pela participação!</p>
+                <p>Use o cupom <strong class="text-yellow-800">ECOQUIZ30</strong> para ganhar <strong class="text-yellow-800">R$30,00 de desconto</strong> em compras acima de R$196,80 em nosso site!</p>
+            </div>
             <p id="final-feedback-message" class="text-gray-600 mb-2 text-lg"></p>
-            <p class="text-md text-blue-600 font-semibold mb-6">Parabéns! A sua participação está concorrendo a prémios da CAN.U.DO! Fique de olho no seu email e nas nossas redes sociais para novidades sobre o sorteio/resultado.</p>
+            <p id="next-steps-message" class="text-md text-blue-600 font-semibold mb-6"></p>
             
             <div class="mb-6 text-left">
-                 <h3 class="text-xl font-semibold text-green-700 mb-2">As suas Respostas:</h3>
+                 <h3 class="text-xl font-semibold text-green-700 mb-2">Respostas do Dia:</h3>
                  <div id="answers-review" class="space-y-3 max-h-48 overflow-y-auto p-3 bg-gray-50 rounded-lg border border-gray-200">
                  </div>
             </div>
             
             <button id="show-ranking-button" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg shadow-md hover:shadow-lg transition duration-300 text-lg">
-                Ver Ranking Geral
+                Ver Ranking Geral (Cumulativo)
             </button>
         </div>
 
         <div id="ranking-screen" class="hidden">
-            <h2 class="text-3xl font-bold text-green-700 mb-6 text-center">Ranking Geral - Quiz CAN.U.DO</h2>
+            <h2 class="text-3xl font-bold text-green-700 mb-6 text-center">Ranking Geral Cumulativo - Quiz CAN.U.DO</h2>
             <div class="overflow-x-auto">
                 <table id="ranking-table-display" class="min-w-full ranking-table">
                     <thead>
                         <tr>
                             <th>Pos.</th>
                             <th>Nome</th>
-                            <th>Pontuação</th>
-                            <th>Tempo Total</th> 
-                            <th>Data</th>
+                            <th>Pont. Cumulativa</th>
+                            <th>Tempo Total Geral</th> 
+                            <th>Último Dia Jog.</th>
                         </tr>
                     </thead>
                     <tbody id="ranking-body">
@@ -193,7 +238,7 @@
     <script type="module">
         // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
-        import { getFirestore, collection, addDoc, getDocs, query, where, orderBy, limit, doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, getDocs, query, where, orderBy, limit, doc, setDoc, serverTimestamp, runTransaction } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js"; 
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-analytics.js";
 
         // Your web app's Firebase configuration
@@ -211,216 +256,48 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
         const analytics = getAnalytics(app); 
-        const rankingsCollectionRef = collection(db, 'rankings'); 
+        const rankingsCollectionRef = collection(db, 'rankings_multiday_v2'); // Nova coleção para os novos campos
 
         // --- DADOS DO QUIZ ---
-         const quizData = [
-            {
-                question: "O que é greenwashing?",
-                options: [
-                    "Prática de empresas que exageram ou falsamente promovem suas ações de sustentabilidade.",
-                    "Processo de lavagem de embalagens para reciclagem.",
-                    "Um tipo de tinta ecológica.",
-                    "Uma campanha para limpar oceanos."
-                ],
-                answer: "Prática de empresas que exageram ou falsamente promovem suas ações de sustentabilidade."
-            },
-            {
-                question: "Quantos copos plásticos evitamos por ano ao substituí-lo por um copo reutilizável da Can.u.do?",
-                options: [
-                    "Cerca de 800 copos",
-                    "Cerca de 1200 copos",
-                    "cerca de 1.400 copos",
-                    "Menos de 800 copos"
-                ],
-                answer: "cerca de 1.400 copos"
-            },
-            {
-                question: "Quais os pilares da sustentabilidade?",
-                options: [
-                    "Ambiental, Social e Econômico",
-                    "Ecológico, Financeiro e Político",
-                    "Reciclagem, Reutilização e Redução",
-                    "Natureza, Humanidade e Lucro"
-                ],
-                answer: "Ambiental, Social e Econômico"
-            },
-            {
-                question: "Qual a vida útil média de uma garrafa térmica de inox 304 se for bem conservada?",
-                options: [
-                    "1-2 anos",
-                    "3-5 anos",
-                    "5-10 anos",
-                    "Mais de 10 anos"
-                ],
-                answer: "5-10 anos" 
-            },
-            {
-                question: "Qual material é mais difícil de se decompor no meio ambiente?", 
-                options: [
-                    "Papel comum",
-                    "Plástico (ex: PET, PVC)",
-                    "Vidro",
-                    "Tecido de algodão puro"
-                ],
-                answer: "Vidro" 
-            },
-            {
-                question: "Qual o objetivo geral das ODS (Objetivos de Desenvolvimento Sustentável) desenvolvidas pela Agenda 2030?",
-                options: [
-                    "Promover a paz, erradicar a pobreza e proteger o planeta, assegurando a prosperidade para todos.",
-                    "Aumentar o comércio internacional entre países desenvolvidos.",
-                    "Financiar projetos de energia renovável exclusivamente.",
-                    "Reduzir a população mundial para diminuir o impacto ambiental."
-                ],
-                answer: "Promover a paz, erradicar a pobreza e proteger o planeta, assegurando a prosperidade para todos."
-            },
-            {
-                question: "A Agenda 2030 é composta por quantos Objetivos de Desenvolvimento Sustentável?",
-                options: ["10", "15", "17", "20"],
-                answer: "17"
-            },
-            {
-                question: "Qual o significado geral dos '7 R's' da sustentabilidade?",
-                options: [   
-                    "Sete regras para investimentos financeiros em empresas verdes.",
-                    "Um conjunto de ações como Repensar, Recusar, Reduzir, Reparar, Reutilizar, Reinserir (Reciclar) e Responsabilizar-se.",
-                    "Sete rios mais importantes a serem despoluídos no mundo.",
-                    "Sete relatórios anuais sobre o clima."
-                ],
-                answer: "Um conjunto de ações como Repensar, Recusar, Reduzir, Reparar, Reutilizar, Reinserir (Reciclar) e Responsabilizar-se."
-            },
-            {
-                question: "O que é ESG?",
-                options: [
-                    "Environmental, Social and Governance (Ambiental, Social e Governança)",
-                    "Economic Sustainable Growth (Crescimento Econômico Sustentável)",
-                    "Energy Saving Group (Grupo de Economia de Energia)",
-                    "Ecological Standard Guide (Guia de Padrão Ecológico)"
-                ],
-                answer: "Environmental, Social and Governance (Ambiental, Social e Governança)"
-            },
-            {
-                question: "Qual das alternativas melhor descreve o impacto dos microplásticos na cadeia alimentar?",
-                options: [
-                    "Servem como nutrientes para algas marinhas.",
-                    "São rapidamente decompostos e eliminados pelos animais.",
-                    "Afetam apenas animais de grande porte.",
-                    "São ingeridos por organismos marinhos, acumulando-se e podendo chegar aos humanos."
-                ],
-                answer: "São ingeridos por organismos marinhos, acumulando-se e podendo chegar aos humanos."
-            },
-            {
-                question: "O conceito de 'economia circular' está mais relacionado a qual prática?",
-                options: [
-                    "Maximizar o uso de recursos, mantendo-os em ciclo pelo maior tempo possível, minimizando resíduos.",
-                    "Exportar resíduos para outros países.",
-                    "Focar apenas na reciclagem de materiais.",
-                    "Aumentar a produção para reduzir custos unitários."
-                ],
-                answer: "Maximizar o uso de recursos, mantendo-os em ciclo pelo maior tempo possível, minimizando resíduos."
-            },
-            {
-                question: "A Can.u.do, como marca focada em reutilizáveis, provavelmente oferece quais tipos de produtos com isolamento térmico?",
-                options: [
-                    "Apenas garrafas",
-                    "Baldes de gelo, cuias, garrafas e copos térmicos.",
-                    "Apenas copos e garrafas",
-                    "Canudos e garrafas."
-                ],
-                answer: "Baldes de gelo, cuias, garrafas e copos térmicos." 
-            },
-            {
-                question: "O que são microplásticos e onde predominantemente os encontramos?",
-                options: [
-                    "Um tipo de plástico biodegradável usado em embalagens.",
-                    "Pequenas partículas de plástico (<5mm), encontradas em oceanos, rios, solo, ar e até em alimentos e água potável.",
-                    "Plásticos visíveis a olho nu flutuando nos oceanos.",
-                    "Componentes eletrônicos de tamanho micro."
-                ],
-                answer: "Pequenas partículas de plástico (<5mm), encontradas em oceanos, rios, solo, ar e até em alimentos e água potável."
-            },
-            {
-                question: "Qual a média de tempo de decomposição de um canudo plástico na natureza?",
-                options: [
-                    "Menos de 1 ano",
-                    "Cerca de 10 anos",
-                    "Cerca de 50 anos",
-                    "Até 200 anos ou mais"
-                ],
-                answer: "Até 200 anos ou mais"
-            },
-            {
-                question: "Carbono neutro - qual a melhor definição e exemplo que se encaixa no conceito?",
-                options: [
-                    "Não emitir nenhum tipo de gás de efeito estufa em nenhuma atividade.",
-                    "Utilizar apenas carros elétricos em uma cidade.",
-                    "Emitir a mesma quantidade de carbono que se consegue compensar (ex: plantio de árvores, energias renováveis).",
-                    "Um selo dado a produtos que não usam carbono em sua composição química."
-                ],
-                answer: "Emitir a mesma quantidade de carbono que se consegue compensar (ex: plantio de árvores, energias renováveis)."
-            },
-            {
-                question: "Quantas toneladas de plástico chegam aos oceanos todos os anos, segundo estimativas recentes?",
-                options: [
-                    "5 milhões de toneladas",
-                    "Dezenas de milhares de toneladas",
-                    "De 8 a 12 milhões de toneladas",
-                    "2 milhares de toneladas."
-                ],
-                answer: "De 8 a 12 milhões de toneladas" 
-            },
-            {
-                question: "Qual o papel fundamental das abelhas no equilíbrio ambiental?",
-                options: [
-                    "Produção de mel apenas para consumo humano.",
-                    "Controle de pragas em plantações de forma natural.",
-                    "Polinização de plantas, essencial para a produção de alimentos e manutenção da biodiversidade.",
-                    "Aeração do solo em grandes áreas."
-                ],
-                answer: "Polinização de plantas, essencial para a produção de alimentos e manutenção da biodiversidade."
-            },
-            {
-                question: "O que é o conceito de 'pegada ecológica'?",
-                options: [  
-                    "A marca que deixamos ao caminhar em trilhas na natureza.",
-                    "O impacto financeiro total de ações sustentáveis de uma empresa.",
-                    "A quantidade de lixo reciclável que uma pessoa produz anualmente.",
-                    "Medida da quantidade de recursos naturais que utilizamos versus a capacidade do planeta de regenerá-los."
-                ],
-                answer: "Medida da quantidade de recursos naturais que utilizamos versus a capacidade do planeta de regenerá-los."
-            },
-            {
-                question: "Qual o significado do termo 'upcycling' e como podemos associar essa prática a um hábito sustentável?",
-                options: [
-                    "Reciclar materiais transformando-os em produtos de menor valor agregado.",
-                    "Descartar produtos eletrônicos de forma correta em postos de coleta.",
-                    "Transformar resíduos em novos produtos de maior valor, reduzindo descarte e uso de nova matéria-prima.",
-                    "Comprar apenas produtos feitos de material 100% reciclado."
-                ],
-                answer: "Transformar resíduos em novos produtos de maior valor, reduzindo descarte e uso de nova matéria-prima."
-            },
-            {
-                question: "O que representa o uso de produtos reutilizáveis como os da Can.u.do?",
-                options: [
-                    "Uma escolha consciente que reduz desperdício, consumo de recursos e poluição.",
-                    "Apenas uma tendência de moda passageira sem impacto real.",
-                    "Uma forma mais cara e menos prática de consumir no dia a dia.",
-                    "Uma solução que não resolve problemas ambientais em larga escala."
-                ],
-                answer: "Uma escolha consciente que reduz desperdício, consumo de recursos e poluição."
-            }
+        const quizData = [ // Mantendo as mesmas perguntas para simplificar
+            { question: "O que é greenwashing?", options: ["Prática de empresas que exageram ou falsamente promovem suas ações de sustentabilidade.", "Processo de lavagem de embalagens para reciclagem.", "Um tipo de tinta ecológica.", "Uma campanha para limpar oceanos."], answer: "Prática de empresas que exageram ou falsamente promovem suas ações de sustentabilidade." },
+            { question: "Quantos copos plásticos evitamos por ano ao substituí-lo por um copo reutilizável da Can.u.do (considerando uso diário em dias úteis)?", options: ["Cerca de 800 copos", "Cerca de 1200 copos", "cerca de 1.400 copos", "Menos de 800 copos"], answer: "cerca de 1.400 copos" },
+            { question: "Quais os pilares da sustentabilidade?", options: ["Ambiental, Social e Econômico", "Ecológico, Financeiro e Político", "Reciclagem, Reutilização e Redução", "Natureza, Humanidade e Lucro"], answer: "Ambiental, Social e Econômico" },
+            { question: "Qual a vida útil média de uma garrafa térmica de inox 304 se for bem conservada?", options: ["1-2 anos", "3-5 anos", "5-10 anos", "Mais de 10 anos"], answer: "5-10 anos" },
+            { question: "Qual material é mais difícil de se decompor no meio ambiente?", options: ["Papel comum", "Plástico (ex: PET, PVC)", "Vidro", "Tecido de algodão puro"], answer: "Vidro" },
+            { question: "Qual o objetivo geral das ODS (Objetivos de Desenvolvimento Sustentável) desenvolvidas pela Agenda 2030?", options: ["Promover a paz, erradicar a pobreza e proteger o planeta, assegurando a prosperidade para todos.", "Aumentar o comércio internacional entre países desenvolvidos.", "Financiar projetos de energia renovável exclusivamente.", "Reduzir a população mundial para diminuir o impacto ambiental."], answer: "Promover a paz, erradicar a pobreza e proteger o planeta, assegurando a prosperidade para todos." },
+            { question: "A Agenda 2030 é composta por quantos Objetivos de Desenvolvimento Sustentável?", options: ["10", "15", "17", "20"], answer: "17" },
+            { question: "Qual o significado geral dos '7 R's' da sustentabilidade?", options: ["Um conjunto de ações como Repensar, Recusar, Reduzir, Reparar, Reutilizar, Reinserir (Reciclar) e Responsabilizar-se.", "Sete regras para investimentos financeiros em empresas verdes.", "Sete rios mais importantes a serem despoluídos no mundo.", "Sete relatórios anuais sobre o clima."], answer: "Um conjunto de ações como Repensar, Recusar, Reduzir, Reparar, Reutilizar, Reinserir (Reciclar) e Responsabilizar-se." },
+            { question: "O que é ESG?", options: ["Environmental, Social and Governance (Ambiental, Social e Governança)", "Economic Sustainable Growth (Crescimento Econômico Sustentável)", "Energy Saving Group (Grupo de Economia de Energia)", "Ecological Standard Guide (Guia de Padrão Ecológico)"], answer: "Environmental, Social and Governance (Ambiental, Social e Governança)" },
+            { question: "Qual das alternativas melhor descreve o impacto dos microplásticos na cadeia alimentar?", options: ["São ingeridos por organismos marinhos, acumulando-se e podendo chegar aos humanos.", "Servem como nutrientes para algas marinhas.", "São rapidamente decompostos e eliminados pelos animais.", "Afetam apenas animais de grande porte."], answer: "São ingeridos por organismos marinhos, acumulando-se e podendo chegar aos humanos." },
+            { question: "O conceito de 'economia circular' está mais relacionado a qual prática?", options: ["Maximizar o uso de recursos, mantendo-os em ciclo pelo maior tempo possível, minimizando resíduos.", "Exportar resíduos para outros países.", "Focar apenas na reciclagem de materiais.", "Aumentar a produção para reduzir custos unitários."], answer: "Maximizar o uso de recursos, mantendo-os em ciclo pelo maior tempo possível, minimizando resíduos." },
+            { question: "A Can.u.do, como marca focada em reutilizáveis, provavelmente oferece quais tipos de produtos com isolamento térmico?", options: ["Apenas garrafas", "Baldes de gelo, cuias, garrafas e copos térmicos.", "Apenas copos e garrafas", "Canudos e garrafas."], answer: "Baldes de gelo, cuias, garrafas e copos térmicos." },
+            { question: "O que são microplásticos e onde predominantemente os encontramos?", options: ["Pequenas partículas de plástico (<5mm), encontradas em oceanos, rios, solo, ar e até em alimentos e água potável.", "Um tipo de plástico biodegradável usado em embalagens.", "Plásticos visíveis a olho nu flutuando nos oceanos.", "Componentes eletrônicos de tamanho micro."], answer: "Pequenas partículas de plástico (<5mm), encontradas em oceanos, rios, solo, ar e até em alimentos e água potável." },
+            { question: "Qual a média de tempo de decomposição de um canudo plástico na natureza?", options: ["Menos de 1 ano", "Cerca de 10 anos", "Cerca de 50 anos", "Até 200 anos ou mais"], answer: "Até 200 anos ou mais" },
+            { question: "Carbono neutro - qual a melhor definição e exemplo que se encaixa no conceito?", options: ["Emitir a mesma quantidade de carbono que se consegue compensar (ex: plantio de árvores, energias renováveis).", "Não emitir nenhum tipo de gás de efeito estufa em nenhuma atividade.", "Utilizar apenas carros elétricos em uma cidade.", "Um selo dado a produtos que não usam carbono em sua composição química."], answer: "Emitir a mesma quantidade de carbono que se consegue compensar (ex: plantio de árvores, energias renováveis)." },
+            { question: "Quantas toneladas de plástico chegam aos oceanos todos os anos, segundo estimativas recentes?", options: ["5 milhões de toneladas", "Dezenas de milhares de toneladas", "De 8 a 12 milhões de toneladas", "2 milhares de toneladas."], answer: "De 8 a 12 milhões de toneladas" },
+            { question: "Qual o papel fundamental das abelhas no equilíbrio ambiental?", options: ["Polinização de plantas, essencial para a produção de alimentos e manutenção da biodiversidade.", "Produção de mel apenas para consumo humano.", "Controle de pragas em plantações de forma natural.", "Aeração do solo em grandes áreas."], answer: "Polinização de plantas, essencial para a produção de alimentos e manutenção da biodiversidade." },
+            { question: "O que é o conceito de 'pegada ecológica'?", options: ["Medida da quantidade de recursos naturais que utilizamos versus a capacidade do planeta de regenerá-los.", "A marca que deixamos ao caminhar em trilhas na natureza.", "O impacto financeiro total de ações sustentáveis de uma empresa.", "A quantidade de lixo reciclável que uma pessoa produz anualmente."], answer: "Medida da quantidade de recursos naturais que utilizamos versus a capacidade do planeta de regenerá-los." },
+            { question: "Qual o significado do termo 'upcycling' e como podemos associar essa prática a um hábito sustentável?", options: ["Transformar resíduos em novos produtos de maior valor, reduzindo descarte e uso de nova matéria-prima.", "Reciclar materiais transformando-os em produtos de menor valor agregado.", "Descartar produtos eletrônicos de forma correta em postos de coleta.", "Comprar apenas produtos feitos de material 100% reciclado."], answer: "Transformar resíduos em novos produtos de maior valor, reduzindo descarte e uso de nova matéria-prima." },
+            { question: "O que representa o uso de produtos reutilizáveis como os da Can.u.do?", options: ["Uma escolha consciente que reduz desperdício, consumo de recursos e poluição.", "Apenas uma tendência de moda passageira sem impacto real.", "Uma forma mais cara e menos prática de consumir no dia a dia.", "Uma solução que não resolve problemas ambientais em larga escala."], answer: "Uma escolha consciente que reduz desperdício, consumo de recursos e poluição." }
         ];
 
         const startScreen = document.getElementById('start-screen');
         const questionScreen = document.getElementById('question-screen');
         const resultsScreen = document.getElementById('results-screen');
         const rankingScreen = document.getElementById('ranking-screen');
+        const quizDayInfo = document.getElementById('quiz-day-info');
+        const currentQuizDayDisplay = document.getElementById('current-quiz-day-display');
+        const dailyScoreDisplay = document.getElementById('daily-score-display');
+        const dailyTimeDisplay = document.getElementById('daily-time-display');
+        const nextStepsMessage = document.getElementById('next-steps-message');
+
 
         const playerNameInput = document.getElementById('player-name');
         const playerEmailInput = document.getElementById('player-email');
-        const playerInstagramInput = document.getElementById('player-instagram');
+        const playerInstagramInput = document.getElementById('player-instagram'); // Mantido, mas agora usaremos referralHandle
         const marketingConsentCheckbox = document.getElementById('marketing-consent'); 
+        const referralHandleInput = document.getElementById('referral-handle'); // Novo input para @
         const startButton = document.getElementById('start-button');
         const startError = document.getElementById('start-error');
         
@@ -432,13 +309,13 @@
         const optionsContainer = document.getElementById('options-container');
         const questionNumberDisplay = document.getElementById('question-number');
         const totalQuestionsDisplay = document.getElementById('total-questions');
-        const scoreDisplay = document.getElementById('score');
+        const scoreDisplay = document.getElementById('score'); 
         const progressBar = document.getElementById('progress-bar');
         const timerBar = document.getElementById('timer-bar');
         const bonusFeedback = document.getElementById('bonus-feedback');
 
         const resultPlayerName = document.getElementById('result-player-name');
-        const finalScoreDisplay = document.getElementById('final-score');
+        const finalScoreDisplay = document.getElementById('final-score'); 
         const finalFeedbackMessage = document.getElementById('final-feedback-message');
         const answersReviewDiv = document.getElementById('answers-review');
 
@@ -446,113 +323,125 @@
         const noRankingDataP = document.getElementById('no-ranking-data');
 
         const MAX_QUESTION_TIME_SECONDS = 60; 
-        const QUIZ_STATE_KEY_PREFIX = 'canudoQuizState_';
+        const MAX_QUIZ_DAYS = 5; 
+        const QUIZ_STATE_KEY_PREFIX = 'canudoQuizState_multiday_v2_'; // Novo prefixo para o estado
 
         let currentQuestionIndex = 0;
-        let score = 0;
+        let scoreForCurrentDay = 0; 
         let userAnswers = [];
         let currentPlayerName = '';
         let currentPlayerEmail = '';
-        let currentPlayerInstagram = '';
+        let currentPlayerReferralPlatform = ''; // Novo: Instagram ou TikTok
+        let currentPlayerReferralHandle = ''; // Novo: @ da plataforma
         let currentPlayerMarketingConsent = false; 
-        let quizStartTime; 
-        let totalQuizTimeMs = 0; 
+        let quizAttemptStartTime; 
+        let totalTimeForCurrentDayMs = 0; 
+        let currentQuizDayForPlayer = 0; 
 
-        let questionStartTime;
-        let questionTimerInterval;
-        let questionTimeRemaining;
-        let selectedOptionButton = null;
-
-        function getQuizStateKey(email) {
-            return `${QUIZ_STATE_KEY_PREFIX}${email}`;
+        // --- Funções de Estado do Quiz (localStorage) ---
+        function getQuizStateKey(email, day) {
+            return `${QUIZ_STATE_KEY_PREFIX}${email}_day${day}`;
         }
 
         function saveQuizState() {
-            if (!currentPlayerEmail) return; 
+            if (!currentPlayerEmail || currentQuizDayForPlayer === 0) return; 
             const quizState = {
                 name: currentPlayerName,
                 email: currentPlayerEmail,
-                instagram: currentPlayerInstagram,
+                referralPlatform: currentPlayerReferralPlatform, // Salva plataforma
+                referralHandle: currentPlayerReferralHandle, // Salva @
                 marketingConsent: currentPlayerMarketingConsent, 
                 currentQuestionIndex: currentQuestionIndex,
-                score: score,
+                scoreForCurrentDay: scoreForCurrentDay,
                 userAnswers: userAnswers,
-                quizStartTime: quizStartTime,
+                quizAttemptStartTime: quizAttemptStartTime, 
+                quizDay: currentQuizDayForPlayer
             };
-            localStorage.setItem(getQuizStateKey(currentPlayerEmail), JSON.stringify(quizState));
-            console.log("DEBUG: Estado do quiz salvo no localStorage para", currentPlayerEmail);
+            localStorage.setItem(getQuizStateKey(currentPlayerEmail, currentQuizDayForPlayer), JSON.stringify(quizState));
+            console.log(`DEBUG: Estado do quiz salvo para ${currentPlayerEmail}, Dia ${currentQuizDayForPlayer}`);
         }
 
-        function loadQuizState(email) {
-            const savedStateJSON = localStorage.getItem(getQuizStateKey(email));
+        function loadQuizState(email, day) {
+            const savedStateJSON = localStorage.getItem(getQuizStateKey(email, day));
             if (savedStateJSON) {
-                console.log("DEBUG: Estado do quiz encontrado no localStorage para", email);
-                return JSON.parse(savedStateJSON);
+                const state = JSON.parse(savedStateJSON);
+                if (state.quizDay === day) {
+                    console.log(`DEBUG: Estado do quiz encontrado para ${email}, Dia ${day}`);
+                    return state;
+                } else {
+                     console.log(`DEBUG: Estado encontrado para ${email} é do dia ${state.quizDay}, mas esperando dia ${day}. Descartando.`);
+                     clearQuizState(email, state.quizDay); 
+                }
             }
-            console.log("DEBUG: Nenhum estado do quiz encontrado no localStorage para", email);
+            console.log(`DEBUG: Nenhum estado do quiz encontrado para ${email}, Dia ${day}`);
             return null;
         }
 
-        function clearQuizState(email) {
-            if (!email) return;
-            localStorage.removeItem(getQuizStateKey(email));
-            console.log("DEBUG: Estado do quiz limpo do localStorage para", email);
+        function clearQuizState(email, day) {
+            if (!email || !day) return;
+            localStorage.removeItem(getQuizStateKey(email, day));
+            console.log(`DEBUG: Estado do quiz limpo para ${email}, Dia ${day}`);
         }
 
-
-        async function saveRankingToFirestore(name, email, instagram, marketingConsent, currentScore, totalTime) { 
-            const playerData = {
-                name: name,
-                email: email,
-                instagram: instagram || null, 
-                marketingConsent: marketingConsent, 
-                score: Number(currentScore), 
-                totalQuizTimeMs: Number(totalTime), 
-                date: new Date().toLocaleDateString('pt-BR'),
-                timestamp: serverTimestamp() 
-            };
-            console.log("DEBUG: Tentando salvar no Firestore:", JSON.stringify(playerData, null, 2));
-            console.log("DEBUG: Tipos de dados para salvar:");
-            for (const key in playerData) {
-                if (playerData.hasOwnProperty(key)) {
-                    console.log(`DEBUG: ${key}: ${playerData[key]} (tipo: ${typeof playerData[key]})`);
-                }
-            }
-            console.log("DEBUG: timestamp (objeto FieldValue):", playerData.timestamp);
-
+        async function savePlayerProgressToFirestore(name, email, referralPlatform, referralHandle, marketingConsent, dailyScore, dailyTimeMs, quizDay) {
+            const playerDocRef = doc(rankingsCollectionRef, email); 
 
             try {
-                const q = query(rankingsCollectionRef, where('email', '==', email), limit(1));
-                const querySnapshot = await getDocs(q);
+                await runTransaction(db, async (transaction) => {
+                    const playerDoc = await transaction.get(playerDocRef);
+                    let newCumulativeScore = dailyScore;
+                    let newTotalTimeAcrossAllQuizzesMs = dailyTimeMs;
+                    let newDailyScores = [{ day: quizDay, score: dailyScore, timeMs: dailyTimeMs }];
+                    let newLastQuizDayCompleted = quizDay;
 
-                if (!querySnapshot.empty) {
-                    const docId = querySnapshot.docs[0].id;
-                    const docRef = doc(db, "rankings", docId);
-                    const existingData = querySnapshot.docs[0].data();
-                    if (playerData.score > existingData.score || 
-                        (playerData.score === existingData.score && playerData.totalQuizTimeMs < existingData.totalQuizTimeMs) ||
-                        playerData.marketingConsent !== existingData.marketingConsent ) {
-                        await setDoc(docRef, playerData, { merge: true }); 
-                        console.log("Ranking atualizado no Firestore para:", email);
-                    } else {
-                        console.log("Pontuação existente é melhor ou igual com tempo melhor/igual e consentimento igual. Nenhum update para:", email);
+                    if (playerDoc.exists()) {
+                        const existingData = playerDoc.data();
+                        if (quizDay > (existingData.lastQuizDayCompleted || 0) ) {
+                            newCumulativeScore = (existingData.cumulativeScore || 0) + dailyScore;
+                            newTotalTimeAcrossAllQuizzesMs = (existingData.totalTimeAcrossAllQuizzesMs || 0) + dailyTimeMs;
+                            newDailyScores = [...(existingData.dailyScores || []), { day: quizDay, score: dailyScore, timeMs: dailyTimeMs }];
+                            newLastQuizDayCompleted = quizDay;
+                        } else {
+                            console.log(`DEBUG: Dia ${quizDay} já completado por ${email}. Não acumulando.`);
+                            newCumulativeScore = existingData.cumulativeScore;
+                            newTotalTimeAcrossAllQuizzesMs = existingData.totalTimeAcrossAllQuizzesMs;
+                            newDailyScores = existingData.dailyScores;
+                            newLastQuizDayCompleted = existingData.lastQuizDayCompleted;
+                        }
                     }
-                } else {
-                    await addDoc(rankingsCollectionRef, playerData);
-                    console.log("Novo ranking salvo no Firestore para:", email);
-                }
+
+                    const playerDataToSet = {
+                        name: name,
+                        email: email,
+                        referralPlatform: referralPlatform || null, // Salva plataforma
+                        referralHandle: referralHandle || null,   // Salva @
+                        instagram: referralHandle || null, // Mantendo o campo antigo 'instagram' para compatibilidade se precisar, mas priorize 'referralHandle'
+                        marketingConsent: marketingConsent,
+                        cumulativeScore: newCumulativeScore,
+                        lastQuizDayCompleted: newLastQuizDayCompleted,
+                        dailyScores: newDailyScores,
+                        totalTimeAcrossAllQuizzesMs: newTotalTimeAcrossAllQuizzesMs,
+                        lastActivityTimestamp: serverTimestamp()
+                    };
+                    console.log("DEBUG: Dados para SET no Firestore:", JSON.stringify(playerDataToSet, null, 2));
+                    transaction.set(playerDocRef, playerDataToSet, { merge: true }); 
+                });
+                console.log(`Progresso salvo no Firestore para ${email}, Dia ${quizDay}`);
+                return true; 
             } catch (error) {
-                console.error("Erro ao salvar ranking no Firestore: ", error);
-                alert("Houve um erro ao salvar a sua pontuação. Tente novamente ou contacte o suporte.");
+                console.error("Erro na transação ao salvar progresso no Firestore: ", error);
+                alert("Houve um erro ao salvar sua pontuação. Tente novamente ou contate o suporte.");
+                return false; 
             }
         }
 
-        async function checkIfPlayerPlayedInFirestore(email) {
+
+        async function checkIfPlayerExistsInFirestore(email) { 
             try {
-                const q = query(rankingsCollectionRef, where('email', '==', email), limit(1));
-                const querySnapshot = await getDocs(q);
-                if (!querySnapshot.empty) {
-                    return querySnapshot.docs[0].data();
+                const playerDocRef = doc(rankingsCollectionRef, email);
+                const playerDoc = await getDoc(playerDocRef); 
+                if (playerDoc.exists()) {
+                    return playerDoc.data();
                 }
                 return null;
             } catch (error) {
@@ -561,12 +450,17 @@
             }
         }
 
+
         startButton.addEventListener('click', async () => { 
             currentPlayerName = playerNameInput.value.trim();
             currentPlayerEmail = playerEmailInput.value.trim();
-            currentPlayerInstagram = playerInstagramInput.value.trim();
+            const selectedPlatformElement = document.querySelector('input[name="referral_platform"]:checked');
+            currentPlayerReferralPlatform = selectedPlatformElement ? selectedPlatformElement.value : '';
+            currentPlayerReferralHandle = referralHandleInput.value.trim();
             currentPlayerMarketingConsent = marketingConsentCheckbox.checked; 
             startError.textContent = '';
+            quizDayInfo.textContent = '';
+
 
             if (!currentPlayerName || !currentPlayerEmail) {
                 startError.textContent = 'Por favor, preencha o seu nome e email para concorrer.';
@@ -576,55 +470,82 @@
                 startError.textContent = 'Por favor, insira um email válido.';
                 return;
             }
-            if (currentPlayerInstagram && !currentPlayerInstagram.startsWith('@')) {
-                currentPlayerInstagram = '@' + currentPlayerInstagram;
+            if (!currentPlayerReferralPlatform) {
+                startError.textContent = 'Por favor, selecione onde ficou sabendo do quiz (Instagram ou TikTok).';
+                return;
+            }
+             if (currentPlayerReferralHandle && !currentPlayerReferralHandle.startsWith('@')) {
+                currentPlayerReferralHandle = '@' + currentPlayerReferralHandle;
             }
 
-            const completedPlayerEntry = await checkIfPlayerPlayedInFirestore(currentPlayerEmail); 
-            if (completedPlayerEntry) {
-                let existingPlayerTime = completedPlayerEntry.totalQuizTimeMs ? (completedPlayerEntry.totalQuizTimeMs / 1000).toFixed(2) + "s" : "N/A";
-                alert(`Olá ${completedPlayerEntry.name}! Parece que você já completou este quiz e a sua pontuação foi ${completedPlayerEntry.score} (tempo: ${existingPlayerTime}). A sua participação já está registada! Você será direcionado(a) para o ranking.`);
-                if (completedPlayerEntry.marketingConsent !== currentPlayerMarketingConsent) {
-                    await saveRankingToFirestore( 
-                        completedPlayerEntry.name, 
-                        completedPlayerEntry.email, 
-                        completedPlayerEntry.instagram, 
-                        currentPlayerMarketingConsent, 
-                        completedPlayerEntry.score, 
-                        completedPlayerEntry.totalQuizTimeMs
-                    );
+
+            const playerDataFromFirestore = await checkIfPlayerExistsInFirestore(currentPlayerEmail); 
+            let lastDayCompleted = 0;
+            if (playerDataFromFirestore) {
+                lastDayCompleted = playerDataFromFirestore.lastQuizDayCompleted || 0;
+                 if (playerDataFromFirestore.name !== currentPlayerName || 
+                    playerDataFromFirestore.referralPlatform !== currentPlayerReferralPlatform ||
+                    playerDataFromFirestore.referralHandle !== (currentPlayerReferralHandle || null) ||
+                    playerDataFromFirestore.marketingConsent !== currentPlayerMarketingConsent) {
+                    
+                    const updatedInfo = {
+                        name: currentPlayerName,
+                        referralPlatform: currentPlayerReferralPlatform,
+                        referralHandle: currentPlayerReferralHandle || null,
+                        instagram: currentPlayerReferralHandle || null, // Mantendo para compatibilidade
+                        marketingConsent: currentPlayerMarketingConsent,
+                        lastActivityTimestamp: serverTimestamp()
+                    };
+                    try {
+                        await setDoc(doc(rankingsCollectionRef, currentPlayerEmail), updatedInfo, { merge: true });
+                        console.log("Informações (nome/origem/consentimento) atualizadas para:", currentPlayerEmail);
+                    } catch (error) {
+                        console.error("Erro ao atualizar informações do jogador:", error);
+                    }
                 }
+            }
+
+            currentQuizDayForPlayer = lastDayCompleted + 1;
+
+            if (currentQuizDayForPlayer > MAX_QUIZ_DAYS) {
+                quizDayInfo.textContent = `Parabéns, ${currentPlayerName}! Você completou todos os ${MAX_QUIZ_DAYS} dias do quiz!`;
                 await displayRankingScreen(true, currentPlayerEmail); 
                 return; 
             }
             
-            const inProgressQuizState = loadQuizState(currentPlayerEmail);
+            quizDayInfo.textContent = `Preparando Quiz - Dia ${currentQuizDayForPlayer} de ${MAX_QUIZ_DAYS}`;
+            currentQuizDayDisplay.textContent = `Dia ${currentQuizDayForPlayer}`;
+
+            const inProgressQuizState = loadQuizState(currentPlayerEmail, currentQuizDayForPlayer);
             if (inProgressQuizState) {
-                console.log("DEBUG: Continuando quiz para", currentPlayerEmail);
+                console.log(`DEBUG: Continuando quiz para ${currentPlayerEmail}, Dia ${currentQuizDayForPlayer}`);
                 currentPlayerName = inProgressQuizState.name; 
-                currentPlayerInstagram = inProgressQuizState.instagram; 
+                currentPlayerReferralPlatform = inProgressQuizState.referralPlatform;
+                currentPlayerReferralHandle = inProgressQuizState.referralHandle; 
                 currentPlayerMarketingConsent = inProgressQuizState.marketingConsent; 
                 currentQuestionIndex = inProgressQuizState.currentQuestionIndex;
-                score = inProgressQuizState.score;
+                scoreForCurrentDay = inProgressQuizState.scoreForCurrentDay;
                 userAnswers = inProgressQuizState.userAnswers;
-                quizStartTime = inProgressQuizState.quizStartTime; 
+                quizAttemptStartTime = inProgressQuizState.quizAttemptStartTime; 
                 
                 playerNameInput.value = currentPlayerName;
-                playerInstagramInput.value = currentPlayerInstagram;
+                // Restaurar seleção da plataforma de origem
+                if(currentPlayerReferralPlatform === "Instagram") document.getElementById('platform-instagram').checked = true;
+                if(currentPlayerReferralPlatform === "TikTok") document.getElementById('platform-tiktok').checked = true;
+                referralHandleInput.value = currentPlayerReferralHandle;
                 marketingConsentCheckbox.checked = currentPlayerMarketingConsent; 
-
 
                 startScreen.classList.add('hidden');
                 resultsScreen.classList.add('hidden');
                 rankingScreen.classList.add('hidden');
                 questionScreen.classList.remove('hidden');
                 
-                scoreDisplay.textContent = score;
+                scoreDisplay.textContent = scoreForCurrentDay;
                 totalQuestionsDisplay.textContent = quizData.length;
                 nextButton.textContent = 'Confirmar e Próxima';
                 showQuestion(); 
             } else {
-                console.log("DEBUG: Iniciando novo quiz para", currentPlayerEmail);
+                console.log(`DEBUG: Iniciando novo quiz para ${currentPlayerEmail}, Dia ${currentQuizDayForPlayer}`);
                 startQuiz(); 
             }
         });
@@ -638,13 +559,17 @@
         backToStartButton.addEventListener('click', () => {
             rankingScreen.classList.add('hidden');
             startScreen.classList.remove('hidden');
+            quizDayInfo.textContent = ''; 
             clearPlayerInputs();
         });
 
         function clearPlayerInputs() {
             playerNameInput.value = '';
             playerEmailInput.value = '';
-            playerInstagramInput.value = '';
+            // playerInstagramInput.value = ''; // Removido, pois foi substituído
+            referralHandleInput.value = '';
+            const platformRadios = document.querySelectorAll('input[name="referral_platform"]');
+            platformRadios.forEach(radio => radio.checked = false);
             marketingConsentCheckbox.checked = false; 
             startError.textContent = '';
         }
@@ -661,11 +586,11 @@
             questionScreen.classList.remove('hidden');
             
             currentQuestionIndex = 0;
-            score = 0;
+            scoreForCurrentDay = 0; 
             userAnswers = [];
-            quizStartTime = Date.now(); 
-            totalQuizTimeMs = 0; 
-            scoreDisplay.textContent = score;
+            quizAttemptStartTime = Date.now(); 
+            totalTimeForCurrentDayMs = 0; 
+            scoreDisplay.textContent = scoreForCurrentDay;
             totalQuestionsDisplay.textContent = quizData.length;
             nextButton.textContent = 'Confirmar e Próxima';
 
@@ -707,7 +632,7 @@
 
         function showQuestion() {
             resetQuestionState();
-            const currentQuestion = quizData[currentQuestionIndex];
+            const currentQuestion = quizData[currentQuestionIndex]; 
             questionText.textContent = currentQuestion.question;
             questionNumberDisplay.textContent = currentQuestionIndex + 1;
             updateProgressBar();
@@ -747,8 +672,8 @@
                  bonusPoints = 0; 
             }
             
-            score += questionPoints + bonusPoints;
-            scoreDisplay.textContent = score;
+            scoreForCurrentDay += questionPoints + bonusPoints; 
+            scoreDisplay.textContent = scoreForCurrentDay;
             bonusFeedback.textContent = currentBonusFeedback;
 
              userAnswers.push({
@@ -831,7 +756,7 @@
                 }, 1800); 
             } else {
                 progressBar.style.width = '100%'; 
-                totalQuizTimeMs = Date.now() - quizStartTime; 
+                totalTimeForCurrentDayMs = Date.now() - quizAttemptStartTime; 
                 setTimeout(() => {
                     showResults(); 
                 }, 1800);
@@ -850,31 +775,54 @@
             rankingScreen.classList.add('hidden');
 
             resultPlayerName.textContent = currentPlayerName;
-            finalScoreDisplay.textContent = `${score}`;
+            dailyScoreDisplay.textContent = scoreForCurrentDay;
+            dailyTimeDisplay.textContent = (totalTimeForCurrentDayMs / 1000).toFixed(2) + "s";
+            document.getElementById('results-quiz-day').textContent = currentQuizDayForPlayer;
             
-            await saveRankingToFirestore(currentPlayerName, currentPlayerEmail, currentPlayerInstagram, currentPlayerMarketingConsent, score, totalQuizTimeMs); 
-            clearQuizState(currentPlayerEmail); 
+            const success = await savePlayerProgressToFirestore(
+                currentPlayerName, 
+                currentPlayerEmail, 
+                currentPlayerReferralPlatform, // Passa a plataforma
+                currentPlayerReferralHandle,   // Passa o @
+                currentPlayerMarketingConsent, 
+                scoreForCurrentDay,  
+                totalTimeForCurrentDayMs, 
+                currentQuizDayForPlayer 
+            ); 
+            
+            if (success) {
+                 clearQuizState(currentPlayerEmail, currentQuizDayForPlayer); 
+            }
+
+            const updatedPlayerData = await checkIfPlayerExistsInFirestore(currentPlayerEmail);
+            if (updatedPlayerData) {
+                finalScoreDisplay.textContent = `${updatedPlayerData.cumulativeScore || scoreForCurrentDay}`; 
+            } else {
+                finalScoreDisplay.textContent = `${scoreForCurrentDay}`; 
+            }
+
 
             let message = "";
-            const maxPossibleBaseScore = quizData.length * 100;
-            const maxPossibleBonusScore = quizData.length * MAX_QUESTION_TIME_SECONDS; 
-            const maxPossibleTotalScore = maxPossibleBaseScore + maxPossibleBonusScore;
-
-            const percentageOfMax = (score / maxPossibleTotalScore) * 100;
+            const maxPossibleDayScore = quizData.length * (100 + MAX_QUESTION_TIME_SECONDS);
+            const percentageOfDayScore = (scoreForCurrentDay / maxPossibleDayScore) * 100;
 
 
-            if (score === maxPossibleTotalScore) { 
-                message = "PERFEITO! Você gabaritou com bónus máximos! Um verdadeiro expert em sustentabilidade!";
-            } else if (percentageOfMax >= 75) {
-                message = "Excelente! A sua pontuação é impressionante. Você entende muito de sustentabilidade!";
-            } else if (percentageOfMax >= 50) {
-                message = "Muito bem! Você demonstrou um ótimo conhecimento. Continue aprendendo e fazendo a diferença!";
-            } else if (percentageOfMax >= 25) {
-                message = "Bom esforço! Cada conhecimento conta. Continue explorando o mundo da sustentabilidade.";
+            if (percentageOfDayScore >= 90) { 
+                message = "Excelente desempenho neste dia!";
+            } else if (percentageOfDayScore >= 70) {
+                message = "Muito bom neste dia!";
+            } else if (percentageOfDayScore >= 50) {
+                message = "Bom esforço neste dia!";
             } else {
-                message = "Obrigado por participar! Aprender é o primeiro passo para um futuro mais verde e consciente.";
+                message = "Continue tentando nos próximos dias!";
             }
             finalFeedbackMessage.textContent = message;
+
+            if (currentQuizDayForPlayer < MAX_QUIZ_DAYS) {
+                nextStepsMessage.textContent = `Você completou o Dia ${currentQuizDayForPlayer}. Volte amanhã para o Quiz do Dia ${currentQuizDayForPlayer + 1}!`;
+            } else {
+                nextStepsMessage.textContent = `Parabéns! Você completou todos os ${MAX_QUIZ_DAYS} dias do quiz! Confira sua posição no ranking geral.`;
+            }
             
             displayAnswersReviewForResults();
         }
@@ -919,9 +867,9 @@
             try {
                 const q = query(
                     rankingsCollectionRef, 
-                    orderBy('score', 'desc'), 
-                    orderBy('totalQuizTimeMs', 'asc'), 
-                    orderBy('timestamp', 'asc'), 
+                    orderBy('cumulativeScore', 'desc'), 
+                    orderBy('totalTimeAcrossAllQuizzesMs', 'asc'), 
+                    orderBy('lastActivityTimestamp', 'asc'), 
                     limit(100)
                 );
                 const querySnapshot = await getDocs(q);
@@ -940,10 +888,10 @@
                         }
                         row.insertCell().textContent = (index + 1) + "º"; 
                         row.insertCell().textContent = player.name;
-                        row.insertCell().textContent = player.score;
-                        const totalTimeSeconds = player.totalQuizTimeMs ? (player.totalQuizTimeMs / 1000).toFixed(2) + "s" : "-";
+                        row.insertCell().textContent = player.cumulativeScore || 0; 
+                        const totalTimeSeconds = player.totalTimeAcrossAllQuizzesMs ? (player.totalTimeAcrossAllQuizzesMs / 1000).toFixed(2) + "s" : "-";
                         row.insertCell().textContent = totalTimeSeconds;
-                        row.insertCell().textContent = player.date;
+                        row.insertCell().textContent = player.lastQuizDayCompleted ? `Dia ${player.lastQuizDayCompleted}` : "-"; 
                     });
                 }
             } catch (error) {
