@@ -81,24 +81,23 @@
             background-color: #A7F3D0 !important;
             font-weight: bold;
         }
-        /* Estilo para os botões de rádio de plataforma */
         .platform-radio-label {
             padding: 0.5rem 1rem;
-            border: 1px solid #D1D5DB; /* gray-300 */
-            border-radius: 0.375rem; /* rounded-md */
+            border: 1px solid #D1D5DB; 
+            border-radius: 0.375rem; 
             cursor: pointer;
             transition: all 0.2s ease-in-out;
-            margin: 0 0.25rem; /* mx-1 */
+            margin: 0 0.25rem; 
         }
         .platform-radio-label:hover {
-            background-color: #F3F4F6; /* gray-100 */
+            background-color: #F3F4F6; 
         }
         input[type="radio"]:checked + .platform-radio-label {
-            background-color: #3B82F6; /* blue-500 */
+            background-color: #3B82F6; 
             color: white;
-            border-color: #2563EB; /* blue-600 */
+            border-color: #2563EB; 
         }
-         input[type="radio"].hidden-radio { /* Esconde o input de rádio padrão */
+         input[type="radio"].hidden-radio { 
             position: absolute;
             opacity: 0;
             width: 0;
@@ -111,13 +110,13 @@
     <div id="quiz-container" class="bg-white p-6 sm:p-8 rounded-xl shadow-2xl w-full max-w-2xl">
         <header class="mb-6 text-center">
             <h1 class="text-3xl sm:text-4xl font-bold brand-gradient">CAN.U.DO</h1>
-            <p class="text-lg text-green-700">Quiz Premiado de Sustentabilidade - Jornada de 5 Dias</p>
+            <p class="text-lg text-green-700">Quiz Premiado de Sustentabilidade</p>
         </header>
 
         <div id="start-screen" class="text-center">
             <img src="https://placehold.co/300x150/A0D2DB/333333?text=Participe+e+Concorra!&font=inter" alt="Imagem de boas-vindas ao quiz CAN.U.DO" class="mx-auto mb-4 rounded-lg shadow-md">
             <p class="text-gray-700 mb-2 text-lg">Insira os seus dados para testar os seus conhecimentos e concorrer!</p>
-            <p class="text-sm text-blue-600 font-semibold mb-4">Acumule pontos ao longo de 5 dias de quiz!</p>
+            <p class="text-sm text-blue-600 font-semibold mb-4">Ao participar, você concorre a prémios incríveis da CAN.U.DO!</p>
             <div class="mb-3">
                 <input type="text" id="player-name" placeholder="O seu Nome Completo" class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent" required>
             </div>
@@ -125,18 +124,16 @@
                 <input type="email" id="player-email" placeholder="O seu Melhor Email" class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent" required>
             </div>
             
-            <div class="mb-3">
-                <p class="text-sm text-gray-600 mb-1">Onde você ficou sabendo do quiz?</p>
-                <div class="flex justify-center space-x-2">
+            <div class="mb-3 text-left">
+                <p class="text-sm text-gray-700 mb-1 text-center">Onde você ficou sabendo do quiz?</p>
+                <div class="flex justify-center space-x-2 mb-2">
                     <input type="radio" name="referral_platform" id="platform-instagram" value="Instagram" class="hidden-radio">
                     <label for="platform-instagram" class="platform-radio-label">Instagram</label>
                     
                     <input type="radio" name="referral_platform" id="platform-tiktok" value="TikTok" class="hidden-radio">
                     <label for="platform-tiktok" class="platform-radio-label">TikTok</label>
                 </div>
-            </div>
-            <div class="mb-4"> 
-                <input type="text" id="referral-handle" placeholder="Seu @ da rede social (opcional)" class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                <input type="text" id="referral-handle" placeholder="Seu @ da rede social selecionada (opcional)" class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent">
             </div>
             <div class="mb-6 flex items-center justify-center"> 
                 <input type="checkbox" id="marketing-consent" class="h-4 w-4 text-green-600 border-gray-300 rounded focus:ring-green-500">
@@ -145,20 +142,16 @@
                 </label>
             </div>
             <button id="start-button" class="w-full sm:w-auto bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-8 rounded-lg shadow-md hover:shadow-lg transition duration-300 text-lg">
-                Iniciar Quiz do Dia!
+                Iniciar Quiz e Concorrer!
             </button>
             <p id="start-error" class="text-red-500 text-sm mt-2"></p>
-            <p id="quiz-day-info" class="text-green-700 font-semibold text-md mt-3"></p>
         </div>
 
         <div id="question-screen" class="hidden">
-            <div class="mb-1">
-                <p id="current-quiz-day-display" class="text-center text-lg font-semibold text-green-700"></p>
-            </div>
             <div class="mb-2">
                 <div class="flex justify-between items-center mb-1">
                     <span class="text-sm font-semibold text-green-600">Questão <span id="question-number"></span> de <span id="total-questions"></span></span>
-                    <span class="text-sm font-semibold text-green-600">Pontos (Dia): <span id="score">0</span></span>
+                    <span class="text-sm font-semibold text-green-600">Pontos: <span id="score">0</span></span>
                 </div>
                 <div class="w-full bg-gray-200 rounded-full h-2.5">
                     <div id="progress-bar" class="bg-green-500 h-2.5 rounded-full progress-bar-fill" style="width: 0%"></div>
@@ -182,11 +175,9 @@
         </div>
 
         <div id="results-screen" class="hidden text-center">
-            <img src="https://placehold.co/300x150/90EE90/333333?text=Quiz+do+Dia+Finalizado!&font=inter" alt="Imagem de finalização do quiz CAN.U.DO" class="mx-auto mb-4 rounded-lg shadow-md">
-            <h2 class="text-3xl font-bold text-green-700 mb-2">Quiz do Dia <span id="results-quiz-day"></span> Concluído, <span id="result-player-name"></span>!</h2>
-            <p class="text-gray-700 text-xl mb-1">Sua pontuação neste dia foi: <span id="daily-score-display" class="font-bold text-green-600"></span></p>
-            <p class="text-gray-700 text-xl mb-1">Seu tempo neste dia foi: <span id="daily-time-display" class="font-bold text-green-600"></span></p>
-            <p class="text-gray-700 text-xl mt-3 mb-1">Sua pontuação cumulativa é:</p>
+            <img src="https://placehold.co/300x150/90EE90/333333?text=Quiz+Finalizado!&font=inter" alt="Imagem de finalização do quiz CAN.U.DO" class="mx-auto mb-4 rounded-lg shadow-md">
+            <h2 class="text-3xl font-bold text-green-700 mb-2">Quiz Concluído, <span id="result-player-name"></span>!</h2>
+            <p class="text-gray-700 text-xl mb-1">A sua pontuação final é:</p>
             <p id="final-score" class="text-5xl font-bold text-green-600 mb-4"></p>
             
             <div class="my-6 p-4 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 rounded-md">
@@ -194,30 +185,30 @@
                 <p>Use o cupom <strong class="text-yellow-800">ECOQUIZ30</strong> para ganhar <strong class="text-yellow-800">R$30,00 de desconto</strong> em compras acima de R$196,80 em nosso site!</p>
             </div>
             <p id="final-feedback-message" class="text-gray-600 mb-2 text-lg"></p>
-            <p id="next-steps-message" class="text-md text-blue-600 font-semibold mb-6"></p>
+            <p class="text-md text-blue-600 font-semibold mb-6">Parabéns! A sua participação está concorrendo a prémios da CAN.U.DO! Fique de olho no seu email e nas nossas redes sociais para novidades sobre o sorteio/resultado.</p>
             
             <div class="mb-6 text-left">
-                 <h3 class="text-xl font-semibold text-green-700 mb-2">Respostas do Dia:</h3>
+                 <h3 class="text-xl font-semibold text-green-700 mb-2">As suas Respostas:</h3>
                  <div id="answers-review" class="space-y-3 max-h-48 overflow-y-auto p-3 bg-gray-50 rounded-lg border border-gray-200">
                  </div>
             </div>
             
             <button id="show-ranking-button" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg shadow-md hover:shadow-lg transition duration-300 text-lg">
-                Ver Ranking Geral (Cumulativo)
+                Ver Ranking Geral
             </button>
         </div>
 
         <div id="ranking-screen" class="hidden">
-            <h2 class="text-3xl font-bold text-green-700 mb-6 text-center">Ranking Geral Cumulativo - Quiz CAN.U.DO</h2>
+            <h2 class="text-3xl font-bold text-green-700 mb-6 text-center">Ranking Geral - Quiz CAN.U.DO</h2>
             <div class="overflow-x-auto">
                 <table id="ranking-table-display" class="min-w-full ranking-table">
                     <thead>
                         <tr>
                             <th>Pos.</th>
                             <th>Nome</th>
-                            <th>Pont. Cumulativa</th>
-                            <th>Tempo Total Geral</th> 
-                            <th>Último Dia Jog.</th>
+                            <th>Pontuação</th>
+                            <th>Tempo Total</th> 
+                            <th>Data</th>
                         </tr>
                     </thead>
                     <tbody id="ranking-body">
@@ -238,7 +229,7 @@
     <script type="module">
         // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
-        import { getFirestore, collection, addDoc, getDocs, query, where, orderBy, limit, doc, setDoc, serverTimestamp, runTransaction } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js"; 
+        import { getFirestore, collection, addDoc, getDocs, query, where, orderBy, limit, doc, setDoc, serverTimestamp, getDoc, runTransaction } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js"; 
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-analytics.js";
 
         // Your web app's Firebase configuration
@@ -256,11 +247,11 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
         const analytics = getAnalytics(app); 
-        const rankingsCollectionRef = collection(db, 'rankings_multiday_v2'); // Nova coleção para os novos campos
+        const rankingsCollectionRef = collection(db, 'rankings_final_v1'); // Coleção para quiz único
 
         // --- DADOS DO QUIZ ---
-        const quizData = [ // Mantendo as mesmas perguntas para simplificar
-            { question: "O que é greenwashing?", options: ["Prática de empresas que exageram ou falsamente promovem suas ações de sustentabilidade.", "Processo de lavagem de embalagens para reciclagem.", "Um tipo de tinta ecológica.", "Uma campanha para limpar oceanos."], answer: "Prática de empresas que exageram ou falsamente promovem suas ações de sustentabilidade." },
+        const quizData = [
+             { question: "O que é greenwashing?", options: ["Prática de empresas que exageram ou falsamente promovem suas ações de sustentabilidade.", "Processo de lavagem de embalagens para reciclagem.", "Um tipo de tinta ecológica.", "Uma campanha para limpar oceanos."], answer: "Prática de empresas que exageram ou falsamente promovem suas ações de sustentabilidade." },
             { question: "Quantos copos plásticos evitamos por ano ao substituí-lo por um copo reutilizável da Can.u.do (considerando uso diário em dias úteis)?", options: ["Cerca de 800 copos", "Cerca de 1200 copos", "cerca de 1.400 copos", "Menos de 800 copos"], answer: "cerca de 1.400 copos" },
             { question: "Quais os pilares da sustentabilidade?", options: ["Ambiental, Social e Econômico", "Ecológico, Financeiro e Político", "Reciclagem, Reutilização e Redução", "Natureza, Humanidade e Lucro"], answer: "Ambiental, Social e Econômico" },
             { question: "Qual a vida útil média de uma garrafa térmica de inox 304 se for bem conservada?", options: ["1-2 anos", "3-5 anos", "5-10 anos", "Mais de 10 anos"], answer: "5-10 anos" },
@@ -286,18 +277,18 @@
         const questionScreen = document.getElementById('question-screen');
         const resultsScreen = document.getElementById('results-screen');
         const rankingScreen = document.getElementById('ranking-screen');
-        const quizDayInfo = document.getElementById('quiz-day-info');
-        const currentQuizDayDisplay = document.getElementById('current-quiz-day-display');
-        const dailyScoreDisplay = document.getElementById('daily-score-display');
-        const dailyTimeDisplay = document.getElementById('daily-time-display');
-        const nextStepsMessage = document.getElementById('next-steps-message');
+        const quizDayInfo = document.getElementById('quiz-day-info'); // Removido ou não usado na versão simplificada
+        const currentQuizDayDisplay = document.getElementById('current-quiz-day-display'); // Removido ou não usado
+        const dailyScoreDisplay = document.getElementById('daily-score-display'); // Removido ou não usado
+        const dailyTimeDisplay = document.getElementById('daily-time-display'); // Removido ou não usado
+        const nextStepsMessage = document.getElementById('next-steps-message'); // Removido ou não usado
 
 
         const playerNameInput = document.getElementById('player-name');
         const playerEmailInput = document.getElementById('player-email');
-        const playerInstagramInput = document.getElementById('player-instagram'); // Mantido, mas agora usaremos referralHandle
+        // const playerInstagramInput = document.getElementById('player-instagram'); // Removido, substituído por referralHandle
         const marketingConsentCheckbox = document.getElementById('marketing-consent'); 
-        const referralHandleInput = document.getElementById('referral-handle'); // Novo input para @
+        const referralHandleInput = document.getElementById('referral-handle'); 
         const startButton = document.getElementById('start-button');
         const startError = document.getElementById('start-error');
         
@@ -323,118 +314,92 @@
         const noRankingDataP = document.getElementById('no-ranking-data');
 
         const MAX_QUESTION_TIME_SECONDS = 60; 
-        const MAX_QUIZ_DAYS = 5; 
-        const QUIZ_STATE_KEY_PREFIX = 'canudoQuizState_multiday_v2_'; // Novo prefixo para o estado
+        const QUIZ_STATE_KEY_PREFIX = 'canudoQuizState_single_v1_'; // Chave para quiz único
 
         let currentQuestionIndex = 0;
-        let scoreForCurrentDay = 0; 
+        let score = 0; 
         let userAnswers = [];
         let currentPlayerName = '';
         let currentPlayerEmail = '';
-        let currentPlayerReferralPlatform = ''; // Novo: Instagram ou TikTok
-        let currentPlayerReferralHandle = ''; // Novo: @ da plataforma
+        let currentPlayerReferralPlatform = ''; 
+        let currentPlayerReferralHandle = ''; 
         let currentPlayerMarketingConsent = false; 
         let quizAttemptStartTime; 
-        let totalTimeForCurrentDayMs = 0; 
-        let currentQuizDayForPlayer = 0; 
+        let totalQuizTimeMs = 0; 
+
+        let questionStartTime;
+        let questionTimerInterval;
+        let questionTimeRemaining;
+        let selectedOptionButton = null;
 
         // --- Funções de Estado do Quiz (localStorage) ---
-        function getQuizStateKey(email, day) {
-            return `${QUIZ_STATE_KEY_PREFIX}${email}_day${day}`;
+        function getQuizStateKey(email) { // Não precisa mais do 'day'
+            return `${QUIZ_STATE_KEY_PREFIX}${email}`;
         }
 
         function saveQuizState() {
-            if (!currentPlayerEmail || currentQuizDayForPlayer === 0) return; 
+            if (!currentPlayerEmail) return; 
             const quizState = {
                 name: currentPlayerName,
                 email: currentPlayerEmail,
-                referralPlatform: currentPlayerReferralPlatform, // Salva plataforma
-                referralHandle: currentPlayerReferralHandle, // Salva @
+                referralPlatform: currentPlayerReferralPlatform, 
+                referralHandle: currentPlayerReferralHandle, 
                 marketingConsent: currentPlayerMarketingConsent, 
                 currentQuestionIndex: currentQuestionIndex,
-                scoreForCurrentDay: scoreForCurrentDay,
+                score: score, // Salva o score atual do quiz único
                 userAnswers: userAnswers,
                 quizAttemptStartTime: quizAttemptStartTime, 
-                quizDay: currentQuizDayForPlayer
             };
-            localStorage.setItem(getQuizStateKey(currentPlayerEmail, currentQuizDayForPlayer), JSON.stringify(quizState));
-            console.log(`DEBUG: Estado do quiz salvo para ${currentPlayerEmail}, Dia ${currentQuizDayForPlayer}`);
+            localStorage.setItem(getQuizStateKey(currentPlayerEmail), JSON.stringify(quizState));
+            console.log("DEBUG: Estado do quiz salvo no localStorage para", currentPlayerEmail);
         }
 
-        function loadQuizState(email, day) {
-            const savedStateJSON = localStorage.getItem(getQuizStateKey(email, day));
+        function loadQuizState(email) {
+            const savedStateJSON = localStorage.getItem(getQuizStateKey(email));
             if (savedStateJSON) {
-                const state = JSON.parse(savedStateJSON);
-                if (state.quizDay === day) {
-                    console.log(`DEBUG: Estado do quiz encontrado para ${email}, Dia ${day}`);
-                    return state;
-                } else {
-                     console.log(`DEBUG: Estado encontrado para ${email} é do dia ${state.quizDay}, mas esperando dia ${day}. Descartando.`);
-                     clearQuizState(email, state.quizDay); 
-                }
+                console.log("DEBUG: Estado do quiz encontrado no localStorage para", email);
+                return JSON.parse(savedStateJSON);
             }
-            console.log(`DEBUG: Nenhum estado do quiz encontrado para ${email}, Dia ${day}`);
+            console.log("DEBUG: Nenhum estado do quiz encontrado no localStorage para", email);
             return null;
         }
 
-        function clearQuizState(email, day) {
-            if (!email || !day) return;
-            localStorage.removeItem(getQuizStateKey(email, day));
-            console.log(`DEBUG: Estado do quiz limpo para ${email}, Dia ${day}`);
+        function clearQuizState(email) {
+            if (!email) return;
+            localStorage.removeItem(getQuizStateKey(email));
+            console.log("DEBUG: Estado do quiz limpo do localStorage para", email);
         }
 
-        async function savePlayerProgressToFirestore(name, email, referralPlatform, referralHandle, marketingConsent, dailyScore, dailyTimeMs, quizDay) {
-            const playerDocRef = doc(rankingsCollectionRef, email); 
+        async function saveRankingToFirestore(name, email, referralPlatform, referralHandle, marketingConsent, finalScore, totalTime) { 
+            const playerDocRef = doc(rankingsCollectionRef, email); // Usa email como ID
+
+            const playerData = {
+                name: name,
+                email: email,
+                referralPlatform: referralPlatform || null,
+                referralHandle: referralHandle || null,
+                marketingConsent: marketingConsent, 
+                score: Number(finalScore), 
+                totalQuizTimeMs: Number(totalTime), 
+                date: new Date().toLocaleDateString('pt-BR'),
+                lastActivityTimestamp: serverTimestamp() // Mudado de 'timestamp' para 'lastActivityTimestamp'
+            };
+            console.log("DEBUG: Tentando salvar no Firestore:", JSON.stringify(playerData, null, 2));
 
             try {
-                await runTransaction(db, async (transaction) => {
-                    const playerDoc = await transaction.get(playerDocRef);
-                    let newCumulativeScore = dailyScore;
-                    let newTotalTimeAcrossAllQuizzesMs = dailyTimeMs;
-                    let newDailyScores = [{ day: quizDay, score: dailyScore, timeMs: dailyTimeMs }];
-                    let newLastQuizDayCompleted = quizDay;
-
-                    if (playerDoc.exists()) {
-                        const existingData = playerDoc.data();
-                        if (quizDay > (existingData.lastQuizDayCompleted || 0) ) {
-                            newCumulativeScore = (existingData.cumulativeScore || 0) + dailyScore;
-                            newTotalTimeAcrossAllQuizzesMs = (existingData.totalTimeAcrossAllQuizzesMs || 0) + dailyTimeMs;
-                            newDailyScores = [...(existingData.dailyScores || []), { day: quizDay, score: dailyScore, timeMs: dailyTimeMs }];
-                            newLastQuizDayCompleted = quizDay;
-                        } else {
-                            console.log(`DEBUG: Dia ${quizDay} já completado por ${email}. Não acumulando.`);
-                            newCumulativeScore = existingData.cumulativeScore;
-                            newTotalTimeAcrossAllQuizzesMs = existingData.totalTimeAcrossAllQuizzesMs;
-                            newDailyScores = existingData.dailyScores;
-                            newLastQuizDayCompleted = existingData.lastQuizDayCompleted;
-                        }
-                    }
-
-                    const playerDataToSet = {
-                        name: name,
-                        email: email,
-                        referralPlatform: referralPlatform || null, // Salva plataforma
-                        referralHandle: referralHandle || null,   // Salva @
-                        instagram: referralHandle || null, // Mantendo o campo antigo 'instagram' para compatibilidade se precisar, mas priorize 'referralHandle'
-                        marketingConsent: marketingConsent,
-                        cumulativeScore: newCumulativeScore,
-                        lastQuizDayCompleted: newLastQuizDayCompleted,
-                        dailyScores: newDailyScores,
-                        totalTimeAcrossAllQuizzesMs: newTotalTimeAcrossAllQuizzesMs,
-                        lastActivityTimestamp: serverTimestamp()
-                    };
-                    console.log("DEBUG: Dados para SET no Firestore:", JSON.stringify(playerDataToSet, null, 2));
-                    transaction.set(playerDocRef, playerDataToSet, { merge: true }); 
-                });
-                console.log(`Progresso salvo no Firestore para ${email}, Dia ${quizDay}`);
-                return true; 
+                // Para quiz único, se já existe, podemos decidir se atualizamos ou não.
+                // A lógica atual de checkIfPlayerExistsInFirestore previne re-jogadas.
+                // Se chegarmos aqui para um jogador existente, seria para atualizar o consentimento.
+                // Se for uma nova submissão (jogador não existe ou lógica de 'refazer' fosse permitida), usamos set com merge.
+                await setDoc(playerDocRef, playerData, { merge: true }); 
+                console.log("Ranking salvo/atualizado no Firestore para:", email);
+                return true;
             } catch (error) {
-                console.error("Erro na transação ao salvar progresso no Firestore: ", error);
-                alert("Houve um erro ao salvar sua pontuação. Tente novamente ou contate o suporte.");
+                console.error("Erro ao salvar ranking no Firestore: ", error);
+                alert("Houve um erro ao salvar a sua pontuação. Tente novamente ou contacte o suporte.");
                 return false; 
             }
         }
-
 
         async function checkIfPlayerExistsInFirestore(email) { 
             try {
@@ -446,10 +411,13 @@
                 return null;
             } catch (error) {
                 console.error("Erro ao verificar jogador no Firestore: ", error);
+                // Retornar null em caso de erro para permitir que o quiz continue (como um novo jogador)
+                // ou mostrar um erro mais específico para o usuário, dependendo da política.
+                // Por ora, um erro aqui pode bloquear o início do quiz, o que pode ser aceitável.
+                // startError.textContent = "Erro ao verificar dados. Tente novamente.";
                 return null; 
             }
         }
-
 
         startButton.addEventListener('click', async () => { 
             currentPlayerName = playerNameInput.value.trim();
@@ -459,7 +427,6 @@
             currentPlayerReferralHandle = referralHandleInput.value.trim();
             currentPlayerMarketingConsent = marketingConsentCheckbox.checked; 
             startError.textContent = '';
-            quizDayInfo.textContent = '';
 
 
             if (!currentPlayerName || !currentPlayerEmail) {
@@ -470,6 +437,7 @@
                 startError.textContent = 'Por favor, insira um email válido.';
                 return;
             }
+            // Plataforma de origem é agora obrigatória
             if (!currentPlayerReferralPlatform) {
                 startError.textContent = 'Por favor, selecione onde ficou sabendo do quiz (Instagram ou TikTok).';
                 return;
@@ -478,21 +446,22 @@
                 currentPlayerReferralHandle = '@' + currentPlayerReferralHandle;
             }
 
-
-            const playerDataFromFirestore = await checkIfPlayerExistsInFirestore(currentPlayerEmail); 
-            let lastDayCompleted = 0;
-            if (playerDataFromFirestore) {
-                lastDayCompleted = playerDataFromFirestore.lastQuizDayCompleted || 0;
-                 if (playerDataFromFirestore.name !== currentPlayerName || 
-                    playerDataFromFirestore.referralPlatform !== currentPlayerReferralPlatform ||
-                    playerDataFromFirestore.referralHandle !== (currentPlayerReferralHandle || null) ||
-                    playerDataFromFirestore.marketingConsent !== currentPlayerMarketingConsent) {
+            const existingPlayerData = await checkIfPlayerExistsInFirestore(currentPlayerEmail); 
+            if (existingPlayerData) {
+                // Jogador já completou o quiz. Apenas atualiza informações se necessário e mostra o ranking.
+                let existingPlayerTime = existingPlayerData.totalQuizTimeMs ? (existingPlayerData.totalQuizTimeMs / 1000).toFixed(2) + "s" : "N/A";
+                alert(`Olá ${existingPlayerData.name}! Parece que você já completou este quiz e a sua pontuação foi ${existingPlayerData.score} (tempo: ${existingPlayerTime}). A sua participação já está registada! Você será direcionado(a) para o ranking.`);
+                
+                // Atualiza informações se mudaram (nome, refs, consentimento)
+                if (existingPlayerData.name !== currentPlayerName || 
+                    existingPlayerData.referralPlatform !== currentPlayerReferralPlatform ||
+                    existingPlayerData.referralHandle !== (currentPlayerReferralHandle || null) ||
+                    existingPlayerData.marketingConsent !== currentPlayerMarketingConsent) {
                     
                     const updatedInfo = {
                         name: currentPlayerName,
                         referralPlatform: currentPlayerReferralPlatform,
                         referralHandle: currentPlayerReferralHandle || null,
-                        instagram: currentPlayerReferralHandle || null, // Mantendo para compatibilidade
                         marketingConsent: currentPlayerMarketingConsent,
                         lastActivityTimestamp: serverTimestamp()
                     };
@@ -503,33 +472,25 @@
                         console.error("Erro ao atualizar informações do jogador:", error);
                     }
                 }
-            }
-
-            currentQuizDayForPlayer = lastDayCompleted + 1;
-
-            if (currentQuizDayForPlayer > MAX_QUIZ_DAYS) {
-                quizDayInfo.textContent = `Parabéns, ${currentPlayerName}! Você completou todos os ${MAX_QUIZ_DAYS} dias do quiz!`;
                 await displayRankingScreen(true, currentPlayerEmail); 
                 return; 
             }
             
-            quizDayInfo.textContent = `Preparando Quiz - Dia ${currentQuizDayForPlayer} de ${MAX_QUIZ_DAYS}`;
-            currentQuizDayDisplay.textContent = `Dia ${currentQuizDayForPlayer}`;
-
-            const inProgressQuizState = loadQuizState(currentPlayerEmail, currentQuizDayForPlayer);
+            // Se não completou, verifica se há um quiz em progresso no localStorage
+            const inProgressQuizState = loadQuizState(currentPlayerEmail);
             if (inProgressQuizState) {
-                console.log(`DEBUG: Continuando quiz para ${currentPlayerEmail}, Dia ${currentQuizDayForPlayer}`);
+                console.log("DEBUG: Continuando quiz para", currentPlayerEmail);
+                // Restaura estado para continuar o quiz
                 currentPlayerName = inProgressQuizState.name; 
                 currentPlayerReferralPlatform = inProgressQuizState.referralPlatform;
                 currentPlayerReferralHandle = inProgressQuizState.referralHandle; 
                 currentPlayerMarketingConsent = inProgressQuizState.marketingConsent; 
                 currentQuestionIndex = inProgressQuizState.currentQuestionIndex;
-                scoreForCurrentDay = inProgressQuizState.scoreForCurrentDay;
+                score = inProgressQuizState.score;
                 userAnswers = inProgressQuizState.userAnswers;
                 quizAttemptStartTime = inProgressQuizState.quizAttemptStartTime; 
                 
                 playerNameInput.value = currentPlayerName;
-                // Restaurar seleção da plataforma de origem
                 if(currentPlayerReferralPlatform === "Instagram") document.getElementById('platform-instagram').checked = true;
                 if(currentPlayerReferralPlatform === "TikTok") document.getElementById('platform-tiktok').checked = true;
                 referralHandleInput.value = currentPlayerReferralHandle;
@@ -540,13 +501,13 @@
                 rankingScreen.classList.add('hidden');
                 questionScreen.classList.remove('hidden');
                 
-                scoreDisplay.textContent = scoreForCurrentDay;
+                scoreDisplay.textContent = score; // Mostra o score acumulado da sessão
                 totalQuestionsDisplay.textContent = quizData.length;
                 nextButton.textContent = 'Confirmar e Próxima';
                 showQuestion(); 
             } else {
-                console.log(`DEBUG: Iniciando novo quiz para ${currentPlayerEmail}, Dia ${currentQuizDayForPlayer}`);
-                startQuiz(); 
+                console.log("DEBUG: Iniciando novo quiz para", currentPlayerEmail);
+                startQuiz(); // Inicia um novo quiz do zero
             }
         });
 
@@ -559,14 +520,13 @@
         backToStartButton.addEventListener('click', () => {
             rankingScreen.classList.add('hidden');
             startScreen.classList.remove('hidden');
-            quizDayInfo.textContent = ''; 
+            // quizDayInfo.textContent = ''; // Removido pois não há mais "dias"
             clearPlayerInputs();
         });
 
         function clearPlayerInputs() {
             playerNameInput.value = '';
             playerEmailInput.value = '';
-            // playerInstagramInput.value = ''; // Removido, pois foi substituído
             referralHandleInput.value = '';
             const platformRadios = document.querySelectorAll('input[name="referral_platform"]');
             platformRadios.forEach(radio => radio.checked = false);
@@ -586,11 +546,11 @@
             questionScreen.classList.remove('hidden');
             
             currentQuestionIndex = 0;
-            scoreForCurrentDay = 0; 
+            score = 0; 
             userAnswers = [];
             quizAttemptStartTime = Date.now(); 
-            totalTimeForCurrentDayMs = 0; 
-            scoreDisplay.textContent = scoreForCurrentDay;
+            totalQuizTimeMs = 0; 
+            scoreDisplay.textContent = score;
             totalQuestionsDisplay.textContent = quizData.length;
             nextButton.textContent = 'Confirmar e Próxima';
 
@@ -672,8 +632,8 @@
                  bonusPoints = 0; 
             }
             
-            scoreForCurrentDay += questionPoints + bonusPoints; 
-            scoreDisplay.textContent = scoreForCurrentDay;
+            score += questionPoints + bonusPoints; 
+            scoreDisplay.textContent = score;
             bonusFeedback.textContent = currentBonusFeedback;
 
              userAnswers.push({
@@ -694,6 +654,10 @@
             nextButton.classList.add('opacity-50', 'cursor-not-allowed');
             nextButton.disabled = true;
             bonusFeedback.textContent = '';
+            if (selectedOptionButton) {
+                selectedOptionButton.classList.remove('selected-option-highlight', 'answer-feedback-correct', 'answer-feedback-incorrect', 'answer-feedback-show-correct');
+                selectedOptionButton.classList.add('border-gray-300', 'bg-white'); 
+            }
             selectedOptionButton = null; 
             while (optionsContainer.firstChild) {
                 optionsContainer.removeChild(optionsContainer.firstChild);
@@ -756,7 +720,7 @@
                 }, 1800); 
             } else {
                 progressBar.style.width = '100%'; 
-                totalTimeForCurrentDayMs = Date.now() - quizAttemptStartTime; 
+                totalQuizTimeMs = Date.now() - quizAttemptStartTime; 
                 setTimeout(() => {
                     showResults(); 
                 }, 1800);
@@ -775,54 +739,39 @@
             rankingScreen.classList.add('hidden');
 
             resultPlayerName.textContent = currentPlayerName;
-            dailyScoreDisplay.textContent = scoreForCurrentDay;
-            dailyTimeDisplay.textContent = (totalTimeForCurrentDayMs / 1000).toFixed(2) + "s";
-            document.getElementById('results-quiz-day').textContent = currentQuizDayForPlayer;
+            finalScoreDisplay.textContent = `${score}`; 
             
-            const success = await savePlayerProgressToFirestore(
+            await saveRankingToFirestore(
                 currentPlayerName, 
                 currentPlayerEmail, 
                 currentPlayerReferralPlatform, // Passa a plataforma
                 currentPlayerReferralHandle,   // Passa o @
                 currentPlayerMarketingConsent, 
-                scoreForCurrentDay,  
-                totalTimeForCurrentDayMs, 
-                currentQuizDayForPlayer 
+                score,  
+                totalQuizTimeMs
             ); 
             
-            if (success) {
-                 clearQuizState(currentPlayerEmail, currentQuizDayForPlayer); 
-            }
-
-            const updatedPlayerData = await checkIfPlayerExistsInFirestore(currentPlayerEmail);
-            if (updatedPlayerData) {
-                finalScoreDisplay.textContent = `${updatedPlayerData.cumulativeScore || scoreForCurrentDay}`; 
-            } else {
-                finalScoreDisplay.textContent = `${scoreForCurrentDay}`; 
-            }
-
+            clearQuizState(currentPlayerEmail); // Limpa o estado do localStorage após salvar no Firebase
 
             let message = "";
-            const maxPossibleDayScore = quizData.length * (100 + MAX_QUESTION_TIME_SECONDS);
-            const percentageOfDayScore = (scoreForCurrentDay / maxPossibleDayScore) * 100;
+            const maxPossibleBaseScore = quizData.length * 100;
+            const maxPossibleBonusScore = quizData.length * MAX_QUESTION_TIME_SECONDS; 
+            const maxPossibleTotalScore = maxPossibleBaseScore + maxPossibleBonusScore;
 
+            const percentageOfMax = (score / maxPossibleTotalScore) * 100;
 
-            if (percentageOfDayScore >= 90) { 
-                message = "Excelente desempenho neste dia!";
-            } else if (percentageOfDayScore >= 70) {
-                message = "Muito bom neste dia!";
-            } else if (percentageOfDayScore >= 50) {
-                message = "Bom esforço neste dia!";
+            if (score === maxPossibleTotalScore) { 
+                message = "PERFEITO! Você gabaritou com bónus máximos! Um verdadeiro expert em sustentabilidade!";
+            } else if (percentageOfMax >= 75) {
+                message = "Excelente! A sua pontuação é impressionante. Você entende muito de sustentabilidade!";
+            } else if (percentageOfMax >= 50) {
+                message = "Muito bem! Você demonstrou um ótimo conhecimento. Continue aprendendo e fazendo a diferença!";
+            } else if (percentageOfMax >= 25) {
+                message = "Bom esforço! Cada conhecimento conta. Continue explorando o mundo da sustentabilidade.";
             } else {
-                message = "Continue tentando nos próximos dias!";
+                message = "Obrigado por participar! Aprender é o primeiro passo para um futuro mais verde e consciente.";
             }
             finalFeedbackMessage.textContent = message;
-
-            if (currentQuizDayForPlayer < MAX_QUIZ_DAYS) {
-                nextStepsMessage.textContent = `Você completou o Dia ${currentQuizDayForPlayer}. Volte amanhã para o Quiz do Dia ${currentQuizDayForPlayer + 1}!`;
-            } else {
-                nextStepsMessage.textContent = `Parabéns! Você completou todos os ${MAX_QUIZ_DAYS} dias do quiz! Confira sua posição no ranking geral.`;
-            }
             
             displayAnswersReviewForResults();
         }
@@ -867,9 +816,9 @@
             try {
                 const q = query(
                     rankingsCollectionRef, 
-                    orderBy('cumulativeScore', 'desc'), 
-                    orderBy('totalTimeAcrossAllQuizzesMs', 'asc'), 
-                    orderBy('lastActivityTimestamp', 'asc'), 
+                    orderBy('score', 'desc'), 
+                    orderBy('totalQuizTimeMs', 'asc'), 
+                    orderBy('lastActivityTimestamp', 'asc'), // Alterado de 'timestamp'
                     limit(100)
                 );
                 const querySnapshot = await getDocs(q);
@@ -888,10 +837,11 @@
                         }
                         row.insertCell().textContent = (index + 1) + "º"; 
                         row.insertCell().textContent = player.name;
-                        row.insertCell().textContent = player.cumulativeScore || 0; 
-                        const totalTimeSeconds = player.totalTimeAcrossAllQuizzesMs ? (player.totalTimeAcrossAllQuizzesMs / 1000).toFixed(2) + "s" : "-";
+                        row.insertCell().textContent = player.score; 
+                        const totalTimeSeconds = player.totalQuizTimeMs ? (player.totalQuizTimeMs / 1000).toFixed(2) + "s" : "-";
                         row.insertCell().textContent = totalTimeSeconds;
-                        row.insertCell().textContent = player.lastQuizDayCompleted ? `Dia ${player.lastQuizDayCompleted}` : "-"; 
+                        // A data aqui pode ser a 'date' que já salvamos, ou formatar 'lastActivityTimestamp'
+                        row.insertCell().textContent = player.date; 
                     });
                 }
             } catch (error) {
