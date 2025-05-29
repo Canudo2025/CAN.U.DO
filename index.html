@@ -28,25 +28,25 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
         .selected-option-highlight {
-            border-color: #3B82F6 !important; 
+            border-color: #3B82F6 !important; /* Azul (Tailwind blue-500) */
             border-width: 2px !important;
         }
         .answer-feedback-correct {
-            background-color: #10B981 !important; 
+            background-color: #10B981 !important; /* Verde (Tailwind green-600) */
             color: white !important;
-            border-color: #059669 !important; 
+            border-color: #059669 !important; /* Verde mais escuro (Tailwind green-700) */
             border-width: 2px !important;
         }
         .answer-feedback-incorrect {
-            background-color: #EF4444 !important; 
+            background-color: #EF4444 !important; /* Vermelho (Tailwind red-500) */
             color: white !important;
-            border-color: #DC2626 !important; 
+            border-color: #DC2626 !important; /* Vermelho mais escuro (Tailwind red-600) */
             border-width: 2px !important;
         }
         .answer-feedback-show-correct {
-            background-color: #D1FAE5 !important; 
-            color: #065F46 !important; 
-            border-color: #10B981 !important; 
+            background-color: #D1FAE5 !important; /* Verde bem claro (Tailwind green-100) */
+            color: #065F46 !important; /* Texto verde escuro (Tailwind green-800) */
+            border-color: #10B981 !important; /* Borda verde (Tailwind green-600) */
             border-width: 2px !important;
             font-weight: 600;
         }
@@ -81,28 +81,6 @@
             background-color: #A7F3D0 !important;
             font-weight: bold;
         }
-        .platform-radio-label {
-            padding: 0.5rem 1rem;
-            border: 1px solid #D1D5DB; 
-            border-radius: 0.375rem; 
-            cursor: pointer;
-            transition: all 0.2s ease-in-out;
-            margin: 0 0.25rem; 
-        }
-        .platform-radio-label:hover {
-            background-color: #F3F4F6; 
-        }
-        input[type="radio"]:checked + .platform-radio-label {
-            background-color: #3B82F6; 
-            color: white;
-            border-color: #2563EB; 
-        }
-         input[type="radio"].hidden-radio { 
-            position: absolute;
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
     </style>
 </head>
 <body class="bg-green-50 flex flex-col items-center justify-center min-h-screen p-4">
@@ -123,19 +101,23 @@
             <div class="mb-3">
                 <input type="email" id="player-email" placeholder="O seu Melhor Email" class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent" required>
             </div>
-            
-            <div class="mb-3 text-left">
-                <p class="text-sm text-gray-700 mb-1 text-center">Onde você ficou sabendo do quiz?</p>
-                <div class="flex justify-center space-x-2 mb-2">
-                    <input type="radio" name="referral_platform" id="platform-instagram" value="Instagram" class="hidden-radio">
-                    <label for="platform-instagram" class="platform-radio-label">Instagram</label>
-                    
-                    <input type="radio" name="referral_platform" id="platform-tiktok" value="TikTok" class="hidden-radio">
-                    <label for="platform-tiktok" class="platform-radio-label">TikTok</label>
-                </div>
-                <input type="text" id="referral-handle" placeholder="Seu @ da rede social selecionada (opcional)" class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent">
+            <div class="mb-3">
+                <input type="text" id="player-social-media" placeholder="Sua Rede Social Favorita (@usuario)" class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent">
             </div>
-            <div class="mb-6 flex items-center justify-center"> 
+            <div class="mb-4 text-left">
+                <label class="block text-sm font-medium text-gray-700 mb-1">De onde você veio?</label>
+                <div class="flex items-center space-x-4">
+                    <div>
+                        <input type="radio" id="source-instagram" name="social-source" value="Instagram" class="h-4 w-4 text-green-600 border-gray-300 focus:ring-green-500">
+                        <label for="source-instagram" class="ml-2 text-sm text-gray-700">Instagram</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="source-tiktok" name="social-source" value="TikTok" class="h-4 w-4 text-green-600 border-gray-300 focus:ring-green-500">
+                        <label for="source-tiktok" class="ml-2 text-sm text-gray-700">TikTok</label>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-6 flex items-center justify-center">
                 <input type="checkbox" id="marketing-consent" class="h-4 w-4 text-green-600 border-gray-300 rounded focus:ring-green-500">
                 <label for="marketing-consent" class="ml-2 block text-sm text-gray-700">
                     Aceito receber novidades e ofertas da CAN.U.DO.
@@ -158,7 +140,7 @@
                 </div>
             </div>
             <div class="mb-4">
-                 <p class="text-sm text-center text-orange-600 font-medium">Tempo para bónus máximo (60s):</p> 
+                 <p class="text-sm text-center text-orange-600 font-medium">Tempo para bónus máximo (60s):</p>
                 <div class="w-full bg-gray-200 rounded-full h-3.5 mt-1">
                     <div id="timer-bar" class="h-3.5 rounded-full timer-bar-fill" style="width: 100%;"></div>
                 </div>
@@ -179,27 +161,29 @@
             <h2 class="text-3xl font-bold text-green-700 mb-2">Quiz Concluído, <span id="result-player-name"></span>!</h2>
             <p class="text-gray-700 text-xl mb-1">A sua pontuação final é:</p>
             <p id="final-score" class="text-5xl font-bold text-green-600 mb-4"></p>
-            
-            <div class="my-6 p-4 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 rounded-md">
-                <p class="font-bold">Parabéns pela participação!</p>
-                <p>Use o cupom <strong class="text-yellow-800">ECOQUIZ30</strong> para ganhar <strong class="text-yellow-800">R$30,00 de desconto</strong> em compras acima de R$196,80 em nosso site!</p>
-            </div>
             <p id="final-feedback-message" class="text-gray-600 mb-2 text-lg"></p>
-            <p class="text-md text-blue-600 font-semibold mb-6">Parabéns! A sua participação está concorrendo a prémios da CAN.U.DO! Fique de olho no seu email e nas nossas redes sociais para novidades sobre o sorteio/resultado.</p>
-            
+            <p class="text-md text-blue-600 font-semibold mb-3">Parabéns! A sua participação está concorrendo a prémios da CAN.U.DO! Fique de olho no seu email e nas nossas redes sociais para novidades sobre o sorteio/resultado.</p>
+            <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded-md mb-6 shadow">
+                <p class="font-bold">CUPOM DE PARTICIPAÇÃO: <span class="text-lg">ECOQUIZ30</span></p>
+                <p class="text-sm">Use este cupom e ganhe R$30,00 de desconto em compras acima de R$196,80 em nosso site!</p>
+            </div>
+
             <div class="mb-6 text-left">
                  <h3 class="text-xl font-semibold text-green-700 mb-2">As suas Respostas:</h3>
                  <div id="answers-review" class="space-y-3 max-h-48 overflow-y-auto p-3 bg-gray-50 rounded-lg border border-gray-200">
                  </div>
             </div>
-            
+
             <button id="show-ranking-button" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg shadow-md hover:shadow-lg transition duration-300 text-lg">
                 Ver Ranking Geral
             </button>
         </div>
 
         <div id="ranking-screen" class="hidden">
-            <h2 class="text-3xl font-bold text-green-700 mb-6 text-center">Ranking Geral - Quiz CAN.U.DO</h2>
+            <h2 class="text-3xl font-bold text-green-700 mb-4 text-center">Ranking Geral - Quiz CAN.U.DO</h2>
+            <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-3 rounded-md mb-6 shadow text-sm text-center">
+                <p><span class="font-bold">CUPOM DE PARTICIPAÇÃO: ECOQUIZ30</span> (R$30 de desconto em compras acima de R$196,80)</p>
+            </div>
             <div class="overflow-x-auto">
                 <table id="ranking-table-display" class="min-w-full ranking-table">
                     <thead>
@@ -207,7 +191,7 @@
                             <th>Pos.</th>
                             <th>Nome</th>
                             <th>Pontuação</th>
-                            <th>Tempo Total</th> 
+                            <th>Tempo Total</th>
                             <th>Data</th>
                         </tr>
                     </thead>
@@ -229,15 +213,15 @@
     <script type="module">
         // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
-        import { getFirestore, collection, addDoc, getDocs, query, where, orderBy, limit, doc, setDoc, serverTimestamp, getDoc, runTransaction } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js"; 
+        import { getFirestore, collection, addDoc, getDocs, query, where, orderBy, limit, doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-analytics.js";
 
         // Your web app's Firebase configuration
         const firebaseConfig = {
-            apiKey: "AIzaSyC3SnN1rKl1rjyeLR-cSr56yC3EynHJYi8",
+            apiKey: "AIzaSyC3SnN1rKl1rjyeLR-cSr56yC3EynHJYi8", // ATENÇÃO: Expor a API Key no lado do cliente é normal para Firebase Web, mas configure regras de segurança no Firestore.
             authDomain: "quiz-can-u-do-4010f.firebaseapp.com",
             projectId: "quiz-can-u-do-4010f",
-            storageBucket: "quiz-can-u-do-4010f.appspot.com", 
+            storageBucket: "quiz-can-u-do-4010f.appspot.com",
             messagingSenderId: "309019398953",
             appId: "1:309019398953:web:40be40a3218c9b3c645d38",
             measurementId: "G-YQ1Q50MR0V"
@@ -246,52 +230,221 @@
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
-        const analytics = getAnalytics(app); 
-        const rankingsCollectionRef = collection(db, 'rankings_final_v1'); // Coleção para quiz único
+        const analytics = getAnalytics(app); // Opcional: se for usar Analytics
+        const rankingsCollectionRef = collection(db, 'rankings'); // Referência para a coleção 'rankings'
 
         // --- DADOS DO QUIZ ---
-        const quizData = [
-             { question: "O que é greenwashing?", options: ["Prática de empresas que exageram ou falsamente promovem suas ações de sustentabilidade.", "Processo de lavagem de embalagens para reciclagem.", "Um tipo de tinta ecológica.", "Uma campanha para limpar oceanos."], answer: "Prática de empresas que exageram ou falsamente promovem suas ações de sustentabilidade." },
-            { question: "Quantos copos plásticos evitamos por ano ao substituí-lo por um copo reutilizável da Can.u.do (considerando uso diário em dias úteis)?", options: ["Cerca de 800 copos", "Cerca de 1200 copos", "cerca de 1.400 copos", "Menos de 800 copos"], answer: "cerca de 1.400 copos" },
-            { question: "Quais os pilares da sustentabilidade?", options: ["Ambiental, Social e Econômico", "Ecológico, Financeiro e Político", "Reciclagem, Reutilização e Redução", "Natureza, Humanidade e Lucro"], answer: "Ambiental, Social e Econômico" },
-            { question: "Qual a vida útil média de uma garrafa térmica de inox 304 se for bem conservada?", options: ["1-2 anos", "3-5 anos", "5-10 anos", "Mais de 10 anos"], answer: "5-10 anos" },
-            { question: "Qual material é mais difícil de se decompor no meio ambiente?", options: ["Papel comum", "Plástico (ex: PET, PVC)", "Vidro", "Tecido de algodão puro"], answer: "Vidro" },
-            { question: "Qual o objetivo geral das ODS (Objetivos de Desenvolvimento Sustentável) desenvolvidas pela Agenda 2030?", options: ["Promover a paz, erradicar a pobreza e proteger o planeta, assegurando a prosperidade para todos.", "Aumentar o comércio internacional entre países desenvolvidos.", "Financiar projetos de energia renovável exclusivamente.", "Reduzir a população mundial para diminuir o impacto ambiental."], answer: "Promover a paz, erradicar a pobreza e proteger o planeta, assegurando a prosperidade para todos." },
-            { question: "A Agenda 2030 é composta por quantos Objetivos de Desenvolvimento Sustentável?", options: ["10", "15", "17", "20"], answer: "17" },
-            { question: "Qual o significado geral dos '7 R's' da sustentabilidade?", options: ["Um conjunto de ações como Repensar, Recusar, Reduzir, Reparar, Reutilizar, Reinserir (Reciclar) e Responsabilizar-se.", "Sete regras para investimentos financeiros em empresas verdes.", "Sete rios mais importantes a serem despoluídos no mundo.", "Sete relatórios anuais sobre o clima."], answer: "Um conjunto de ações como Repensar, Recusar, Reduzir, Reparar, Reutilizar, Reinserir (Reciclar) e Responsabilizar-se." },
-            { question: "O que é ESG?", options: ["Environmental, Social and Governance (Ambiental, Social e Governança)", "Economic Sustainable Growth (Crescimento Econômico Sustentável)", "Energy Saving Group (Grupo de Economia de Energia)", "Ecological Standard Guide (Guia de Padrão Ecológico)"], answer: "Environmental, Social and Governance (Ambiental, Social e Governança)" },
-            { question: "Qual das alternativas melhor descreve o impacto dos microplásticos na cadeia alimentar?", options: ["São ingeridos por organismos marinhos, acumulando-se e podendo chegar aos humanos.", "Servem como nutrientes para algas marinhas.", "São rapidamente decompostos e eliminados pelos animais.", "Afetam apenas animais de grande porte."], answer: "São ingeridos por organismos marinhos, acumulando-se e podendo chegar aos humanos." },
-            { question: "O conceito de 'economia circular' está mais relacionado a qual prática?", options: ["Maximizar o uso de recursos, mantendo-os em ciclo pelo maior tempo possível, minimizando resíduos.", "Exportar resíduos para outros países.", "Focar apenas na reciclagem de materiais.", "Aumentar a produção para reduzir custos unitários."], answer: "Maximizar o uso de recursos, mantendo-os em ciclo pelo maior tempo possível, minimizando resíduos." },
-            { question: "A Can.u.do, como marca focada em reutilizáveis, provavelmente oferece quais tipos de produtos com isolamento térmico?", options: ["Apenas garrafas", "Baldes de gelo, cuias, garrafas e copos térmicos.", "Apenas copos e garrafas", "Canudos e garrafas."], answer: "Baldes de gelo, cuias, garrafas e copos térmicos." },
-            { question: "O que são microplásticos e onde predominantemente os encontramos?", options: ["Pequenas partículas de plástico (<5mm), encontradas em oceanos, rios, solo, ar e até em alimentos e água potável.", "Um tipo de plástico biodegradável usado em embalagens.", "Plásticos visíveis a olho nu flutuando nos oceanos.", "Componentes eletrônicos de tamanho micro."], answer: "Pequenas partículas de plástico (<5mm), encontradas em oceanos, rios, solo, ar e até em alimentos e água potável." },
-            { question: "Qual a média de tempo de decomposição de um canudo plástico na natureza?", options: ["Menos de 1 ano", "Cerca de 10 anos", "Cerca de 50 anos", "Até 200 anos ou mais"], answer: "Até 200 anos ou mais" },
-            { question: "Carbono neutro - qual a melhor definição e exemplo que se encaixa no conceito?", options: ["Emitir a mesma quantidade de carbono que se consegue compensar (ex: plantio de árvores, energias renováveis).", "Não emitir nenhum tipo de gás de efeito estufa em nenhuma atividade.", "Utilizar apenas carros elétricos em uma cidade.", "Um selo dado a produtos que não usam carbono em sua composição química."], answer: "Emitir a mesma quantidade de carbono que se consegue compensar (ex: plantio de árvores, energias renováveis)." },
-            { question: "Quantas toneladas de plástico chegam aos oceanos todos os anos, segundo estimativas recentes?", options: ["5 milhões de toneladas", "Dezenas de milhares de toneladas", "De 8 a 12 milhões de toneladas", "2 milhares de toneladas."], answer: "De 8 a 12 milhões de toneladas" },
-            { question: "Qual o papel fundamental das abelhas no equilíbrio ambiental?", options: ["Polinização de plantas, essencial para a produção de alimentos e manutenção da biodiversidade.", "Produção de mel apenas para consumo humano.", "Controle de pragas em plantações de forma natural.", "Aeração do solo em grandes áreas."], answer: "Polinização de plantas, essencial para a produção de alimentos e manutenção da biodiversidade." },
-            { question: "O que é o conceito de 'pegada ecológica'?", options: ["Medida da quantidade de recursos naturais que utilizamos versus a capacidade do planeta de regenerá-los.", "A marca que deixamos ao caminhar em trilhas na natureza.", "O impacto financeiro total de ações sustentáveis de uma empresa.", "A quantidade de lixo reciclável que uma pessoa produz anualmente."], answer: "Medida da quantidade de recursos naturais que utilizamos versus a capacidade do planeta de regenerá-los." },
-            { question: "Qual o significado do termo 'upcycling' e como podemos associar essa prática a um hábito sustentável?", options: ["Transformar resíduos em novos produtos de maior valor, reduzindo descarte e uso de nova matéria-prima.", "Reciclar materiais transformando-os em produtos de menor valor agregado.", "Descartar produtos eletrônicos de forma correta em postos de coleta.", "Comprar apenas produtos feitos de material 100% reciclado."], answer: "Transformar resíduos em novos produtos de maior valor, reduzindo descarte e uso de nova matéria-prima." },
-            { question: "O que representa o uso de produtos reutilizáveis como os da Can.u.do?", options: ["Uma escolha consciente que reduz desperdício, consumo de recursos e poluição.", "Apenas uma tendência de moda passageira sem impacto real.", "Uma forma mais cara e menos prática de consumir no dia a dia.", "Uma solução que não resolve problemas ambientais em larga escala."], answer: "Uma escolha consciente que reduz desperdício, consumo de recursos e poluição." }
+         const quizData = [
+            {
+                question: "O que é greenwashing?",
+                options: [
+                    "Prática de empresas que exageram ou falsamente promovem suas ações de sustentabilidade.",
+                    "Processo de lavagem de embalagens para reciclagem.",
+                    "Um tipo de tinta ecológica.",
+                    "Uma campanha para limpar oceanos."
+                ],
+                answer: "Prática de empresas que exageram ou falsamente promovem suas ações de sustentabilidade."
+            },
+            {
+                question: "Quantos copos plásticos evitamos por ano ao substituí-lo por um copo reutilizável da Can.u.do?",
+                options: [
+                    "Cerca de 800 copos",
+                    "Cerca de 1200 copos",
+                    "cerca de 1.400 copos",
+                    "Menos de 800 copos"
+                ],
+                answer: "cerca de 1.400 copos"
+            },
+            {
+                question: "Quais os pilares da sustentabilidade?",
+                options: [
+                    "Ambiental, Social e Econômico",
+                    "Ecológico, Financeiro e Político",
+                    "Reciclagem, Reutilização e Redução",
+                    "Natureza, Humanidade e Lucro"
+                ],
+                answer: "Ambiental, Social e Econômico"
+            },
+            {
+                question: "Qual a vida útil média de uma garrafa térmica de inox 304 se for bem conservada?",
+                options: [
+                    "1-2 anos",
+                    "3-5 anos",
+                    "5-10 anos",
+                    "Mais de 10 anos"
+                ],
+                answer: "5-10 anos"
+            },
+            {
+                question: "Qual material é mais difícil de se decompor no meio ambiente?",
+                options: [
+                    "Papel comum",
+                    "Plástico (ex: PET, PVC)",
+                    "Vidro",
+                    "Tecido de algodão puro"
+                ],
+                answer: "Vidro"
+            },
+            {
+                question: "Qual o objetivo geral das ODS (Objetivos de Desenvolvimento Sustentável) desenvolvidas pela Agenda 2030?",
+                options: [
+                    "Promover a paz, erradicar a pobreza e proteger o planeta, assegurando a prosperidade para todos.",
+                    "Aumentar o comércio internacional entre países desenvolvidos.",
+                    "Financiar projetos de energia renovável exclusivamente.",
+                    "Reduzir a população mundial para diminuir o impacto ambiental."
+                ],
+                answer: "Promover a paz, erradicar a pobreza e proteger o planeta, assegurando a prosperidade para todos."
+            },
+            {
+                question: "A Agenda 2030 é composta por quantos Objetivos de Desenvolvimento Sustentável?",
+                options: ["10", "15", "17", "20"],
+                answer: "17"
+            },
+            {
+                question: "Qual o significado geral dos '7 R's' da sustentabilidade?",
+                options: [
+                    "Sete regras para investimentos financeiros em empresas verdes.",
+                    "Um conjunto de ações como Repensar, Recusar, Reduzir, Reparar, Reutilizar, Reinserir (Reciclar) e Responsabilizar-se.",
+                    "Sete rios mais importantes a serem despoluídos no mundo.",
+                    "Sete relatórios anuais sobre o clima."
+                ],
+                answer: "Um conjunto de ações como Repensar, Recusar, Reduzir, Reparar, Reutilizar, Reinserir (Reciclar) e Responsabilizar-se."
+            },
+            {
+                question: "O que é ESG?",
+                options: [
+                    "Environmental, Social and Governance (Ambiental, Social e Governança)",
+                    "Economic Sustainable Growth (Crescimento Econômico Sustentável)",
+                    "Energy Saving Group (Grupo de Economia de Energia)",
+                    "Ecological Standard Guide (Guia de Padrão Ecológico)"
+                ],
+                answer: "Environmental, Social and Governance (Ambiental, Social e Governança)"
+            },
+            {
+                question: "Qual das alternativas melhor descreve o impacto dos microplásticos na cadeia alimentar?",
+                options: [
+                    "Servem como nutrientes para algas marinhas.",
+                    "São rapidamente decompostos e eliminados pelos animais.",
+                    "Afetam apenas animais de grande porte.",
+                    "São ingeridos por organismos marinhos, acumulando-se e podendo chegar aos humanos."
+                ],
+                answer: "São ingeridos por organismos marinhos, acumulando-se e podendo chegar aos humanos."
+            },
+            {
+                question: "O conceito de 'economia circular' está mais relacionado a qual prática?",
+                options: [
+                    "Maximizar o uso de recursos, mantendo-os em ciclo pelo maior tempo possível, minimizando resíduos.",
+                    "Exportar resíduos para outros países.",
+                    "Focar apenas na reciclagem de materiais.",
+                    "Aumentar a produção para reduzir custos unitários."
+                ],
+                answer: "Maximizar o uso de recursos, mantendo-os em ciclo pelo maior tempo possível, minimizando resíduos."
+            },
+            {
+                question: "A Can.u.do, como marca focada em reutilizáveis, provavelmente oferece quais tipos de produtos com isolamento térmico?",
+                options: [
+                    "Apenas garrafas",
+                    "Baldes de gelo, cuias, garrafas e copos térmicos.",
+                    "Apenas copos e garrafas",
+                    "Canudos e garrafas."
+                ],
+                answer: "Baldes de gelo, cuias, garrafas e copos térmicos."
+            },
+            {
+                question: "O que são microplásticos e onde predominantemente os encontramos?",
+                options: [
+                    "Um tipo de plástico biodegradável usado em embalagens.",
+                    "Pequenas partículas de plástico (<5mm), encontradas em oceanos, rios, solo, ar e até em alimentos e água potável.",
+                    "Plásticos visíveis a olho nu flutuando nos oceanos.",
+                    "Componentes eletrônicos de tamanho micro."
+                ],
+                answer: "Pequenas partículas de plástico (<5mm), encontradas em oceanos, rios, solo, ar e até em alimentos e água potável."
+            },
+            {
+                question: "Qual a média de tempo de decomposição de um canudo plástico na natureza?",
+                options: [
+                    "Menos de 1 ano",
+                    "Cerca de 10 anos",
+                    "Cerca de 50 anos",
+                    "Até 200 anos ou mais"
+                ],
+                answer: "Até 200 anos ou mais"
+            },
+            {
+                question: "Carbono neutro - qual a melhor definição e exemplo que se encaixa no conceito?",
+                options: [
+                    "Não emitir nenhum tipo de gás de efeito estufa em nenhuma atividade.",
+                    "Utilizar apenas carros elétricos em uma cidade.",
+                    "Emitir a mesma quantidade de carbono que se consegue compensar (ex: plantio de árvores, energias renováveis).",
+                    "Um selo dado a produtos que não usam carbono em sua composição química."
+                ],
+                answer: "Emitir a mesma quantidade de carbono que se consegue compensar (ex: plantio de árvores, energias renováveis)."
+            },
+            {
+                question: "Quantas toneladas de plástico chegam aos oceanos todos os anos, segundo estimativas recentes?",
+                options: [
+                    "5 milhões de toneladas",
+                    "Dezenas de milhares de toneladas",
+                    "De 8 a 12 milhões de toneladas",
+                    "2 milhares de toneladas."
+                ],
+                answer: "De 8 a 12 milhões de toneladas"
+            },
+            {
+                question: "Qual o papel fundamental das abelhas no equilíbrio ambiental?",
+                options: [
+                    "Produção de mel apenas para consumo humano.",
+                    "Controle de pragas em plantações de forma natural.",
+                    "Polinização de plantas, essencial para a produção de alimentos e manutenção da biodiversidade.",
+                    "Aeração do solo em grandes áreas."
+                ],
+                answer: "Polinização de plantas, essencial para a produção de alimentos e manutenção da biodiversidade."
+            },
+            {
+                question: "O que é o conceito de 'pegada ecológica'?",
+                options: [
+                    "A marca que deixamos ao caminhar em trilhas na natureza.",
+                    "O impacto financeiro total de ações sustentáveis de uma empresa.",
+                    "A quantidade de lixo reciclável que uma pessoa produz anualmente.",
+                    "Medida da quantidade de recursos naturais que utilizamos versus a capacidade do planeta de regenerá-los."
+                ],
+                answer: "Medida da quantidade de recursos naturais que utilizamos versus a capacidade do planeta de regenerá-los."
+            },
+            {
+                question: "Qual o significado do termo 'upcycling' e como podemos associar essa prática a um hábito sustentável?",
+                options: [
+                    "Reciclar materiais transformando-os em produtos de menor valor agregado.",
+                    "Descartar produtos eletrônicos de forma correta em postos de coleta.",
+                    "Transformar resíduos em novos produtos de maior valor, reduzindo descarte e uso de nova matéria-prima.",
+                    "Comprar apenas produtos feitos de material 100% reciclado."
+                ],
+                answer: "Transformar resíduos em novos produtos de maior valor, reduzindo descarte e uso de nova matéria-prima."
+            },
+            {
+                question: "O que representa o uso de produtos reutilizáveis como os da Can.u.do?",
+                options: [
+                    "Uma escolha consciente que reduz desperdício, consumo de recursos e poluição.",
+                    "Apenas uma tendência de moda passageira sem impacto real.",
+                    "Uma forma mais cara e menos prática de consumir no dia a dia.",
+                    "Uma solução que não resolve problemas ambientais em larga escala."
+                ],
+                answer: "Uma escolha consciente que reduz desperdício, consumo de recursos e poluição."
+            }
         ];
 
         const startScreen = document.getElementById('start-screen');
         const questionScreen = document.getElementById('question-screen');
         const resultsScreen = document.getElementById('results-screen');
         const rankingScreen = document.getElementById('ranking-screen');
-        const quizDayInfo = document.getElementById('quiz-day-info'); // Removido ou não usado na versão simplificada
-        const currentQuizDayDisplay = document.getElementById('current-quiz-day-display'); // Removido ou não usado
-        const dailyScoreDisplay = document.getElementById('daily-score-display'); // Removido ou não usado
-        const dailyTimeDisplay = document.getElementById('daily-time-display'); // Removido ou não usado
-        const nextStepsMessage = document.getElementById('next-steps-message'); // Removido ou não usado
-
 
         const playerNameInput = document.getElementById('player-name');
         const playerEmailInput = document.getElementById('player-email');
-        // const playerInstagramInput = document.getElementById('player-instagram'); // Removido, substituído por referralHandle
-        const marketingConsentCheckbox = document.getElementById('marketing-consent'); 
-        const referralHandleInput = document.getElementById('referral-handle'); 
+        // const playerInstagramInput = document.getElementById('player-instagram'); // Removido, substituído por player-social-media
+        const playerSocialMediaInput = document.getElementById('player-social-media'); // Novo campo
+        const marketingConsentCheckbox = document.getElementById('marketing-consent');
         const startButton = document.getElementById('start-button');
         const startError = document.getElementById('start-error');
-        
+
         const nextButton = document.getElementById('next-button');
         const showRankingButton = document.getElementById('show-ranking-button');
         const backToStartButton = document.getElementById('back-to-start-button');
@@ -300,55 +453,54 @@
         const optionsContainer = document.getElementById('options-container');
         const questionNumberDisplay = document.getElementById('question-number');
         const totalQuestionsDisplay = document.getElementById('total-questions');
-        const scoreDisplay = document.getElementById('score'); 
+        const scoreDisplay = document.getElementById('score');
         const progressBar = document.getElementById('progress-bar');
         const timerBar = document.getElementById('timer-bar');
         const bonusFeedback = document.getElementById('bonus-feedback');
 
         const resultPlayerName = document.getElementById('result-player-name');
-        const finalScoreDisplay = document.getElementById('final-score'); 
+        const finalScoreDisplay = document.getElementById('final-score');
         const finalFeedbackMessage = document.getElementById('final-feedback-message');
         const answersReviewDiv = document.getElementById('answers-review');
 
         const rankingTableBody = document.getElementById('ranking-body');
         const noRankingDataP = document.getElementById('no-ranking-data');
 
-        const MAX_QUESTION_TIME_SECONDS = 60; 
-        const QUIZ_STATE_KEY_PREFIX = 'canudoQuizState_single_v1_'; // Chave para quiz único
+        const MAX_QUESTION_TIME_SECONDS = 60;
+        const QUIZ_STATE_KEY_PREFIX = 'canudoQuizState_';
 
         let currentQuestionIndex = 0;
-        let score = 0; 
+        let score = 0;
         let userAnswers = [];
         let currentPlayerName = '';
         let currentPlayerEmail = '';
-        let currentPlayerReferralPlatform = ''; 
-        let currentPlayerReferralHandle = ''; 
-        let currentPlayerMarketingConsent = false; 
-        let quizAttemptStartTime; 
-        let totalQuizTimeMs = 0; 
+        let currentPlayerSocialMedia = ''; // Novo para rede social
+        let currentPlayerSocialSource = ''; // Novo para origem da rede social
+        let currentPlayerMarketingConsent = false;
+        let quizStartTime;
+        let totalQuizTimeMs = 0;
 
         let questionStartTime;
         let questionTimerInterval;
         let questionTimeRemaining;
         let selectedOptionButton = null;
 
-        // --- Funções de Estado do Quiz (localStorage) ---
-        function getQuizStateKey(email) { // Não precisa mais do 'day'
+        function getQuizStateKey(email) {
             return `${QUIZ_STATE_KEY_PREFIX}${email}`;
         }
 
         function saveQuizState() {
-            if (!currentPlayerEmail) return; 
+            if (!currentPlayerEmail) return;
             const quizState = {
                 name: currentPlayerName,
                 email: currentPlayerEmail,
-                referralPlatform: currentPlayerReferralPlatform, 
-                referralHandle: currentPlayerReferralHandle, 
-                marketingConsent: currentPlayerMarketingConsent, 
+                socialMedia: currentPlayerSocialMedia, // Salvar rede social
+                socialSource: currentPlayerSocialSource, // Salvar origem
+                marketingConsent: currentPlayerMarketingConsent,
                 currentQuestionIndex: currentQuestionIndex,
-                score: score, // Salva o score atual do quiz único
+                score: score,
                 userAnswers: userAnswers,
-                quizAttemptStartTime: quizAttemptStartTime, 
+                quizStartTime: quizStartTime,
             };
             localStorage.setItem(getQuizStateKey(currentPlayerEmail), JSON.stringify(quizState));
             console.log("DEBUG: Estado do quiz salvo no localStorage para", currentPlayerEmail);
@@ -370,64 +522,82 @@
             console.log("DEBUG: Estado do quiz limpo do localStorage para", email);
         }
 
-        async function saveRankingToFirestore(name, email, referralPlatform, referralHandle, marketingConsent, finalScore, totalTime) { 
-            const playerDocRef = doc(rankingsCollectionRef, email); // Usa email como ID
 
+        async function saveRankingToFirestore(name, email, socialMedia, socialSource, marketingConsent, currentScore, totalTime) {
             const playerData = {
                 name: name,
                 email: email,
-                referralPlatform: referralPlatform || null,
-                referralHandle: referralHandle || null,
-                marketingConsent: marketingConsent, 
-                score: Number(finalScore), 
-                totalQuizTimeMs: Number(totalTime), 
+                socialMedia: socialMedia || null, // Salvar rede social
+                socialSource: socialSource || null, // Salvar origem
+                marketingConsent: marketingConsent,
+                score: Number(currentScore),
+                totalQuizTimeMs: Number(totalTime),
                 date: new Date().toLocaleDateString('pt-BR'),
-                lastActivityTimestamp: serverTimestamp() // Mudado de 'timestamp' para 'lastActivityTimestamp'
+                timestamp: serverTimestamp()
             };
             console.log("DEBUG: Tentando salvar no Firestore:", JSON.stringify(playerData, null, 2));
+            console.log("DEBUG: Tipos de dados para salvar:");
+            for (const key in playerData) {
+                if (playerData.hasOwnProperty(key)) {
+                    console.log(`DEBUG: ${key}: ${playerData[key]} (tipo: ${typeof playerData[key]})`);
+                }
+            }
+            console.log("DEBUG: timestamp (objeto FieldValue):", playerData.timestamp);
+
 
             try {
-                // Para quiz único, se já existe, podemos decidir se atualizamos ou não.
-                // A lógica atual de checkIfPlayerExistsInFirestore previne re-jogadas.
-                // Se chegarmos aqui para um jogador existente, seria para atualizar o consentimento.
-                // Se for uma nova submissão (jogador não existe ou lógica de 'refazer' fosse permitida), usamos set com merge.
-                await setDoc(playerDocRef, playerData, { merge: true }); 
-                console.log("Ranking salvo/atualizado no Firestore para:", email);
-                return true;
+                const q = query(rankingsCollectionRef, where('email', '==', email), limit(1));
+                const querySnapshot = await getDocs(q);
+
+                if (!querySnapshot.empty) {
+                    const docId = querySnapshot.docs[0].id;
+                    const docRef = doc(db, "rankings", docId);
+                    const existingData = querySnapshot.docs[0].data();
+                    // Atualiza se a pontuação for maior, ou se a pontuação for igual e o tempo menor,
+                    // ou se o consentimento de marketing mudou, ou se a rede social/origem mudou.
+                    if (playerData.score > existingData.score ||
+                        (playerData.score === existingData.score && playerData.totalQuizTimeMs < existingData.totalQuizTimeMs) ||
+                        playerData.marketingConsent !== existingData.marketingConsent ||
+                        playerData.socialMedia !== existingData.socialMedia ||
+                        playerData.socialSource !== existingData.socialSource) {
+                        await setDoc(docRef, playerData, { merge: true });
+                        console.log("Ranking atualizado no Firestore para:", email);
+                    } else {
+                        console.log("Dados existentes são melhores ou iguais e informações adicionais não mudaram. Nenhum update para:", email);
+                    }
+                } else {
+                    await addDoc(rankingsCollectionRef, playerData);
+                    console.log("Novo ranking salvo no Firestore para:", email);
+                }
             } catch (error) {
                 console.error("Erro ao salvar ranking no Firestore: ", error);
-                alert("Houve um erro ao salvar a sua pontuação. Tente novamente ou contacte o suporte.");
-                return false; 
+                // Não usar alert aqui, pois pode bloquear a UI em iframes
+                console.error("Houve um erro ao salvar a sua pontuação. Tente novamente ou contacte o suporte.");
             }
         }
 
-        async function checkIfPlayerExistsInFirestore(email) { 
+        async function checkIfPlayerPlayedInFirestore(email) {
             try {
-                const playerDocRef = doc(rankingsCollectionRef, email);
-                const playerDoc = await getDoc(playerDocRef); 
-                if (playerDoc.exists()) {
-                    return playerDoc.data();
+                const q = query(rankingsCollectionRef, where('email', '==', email), limit(1));
+                const querySnapshot = await getDocs(q);
+                if (!querySnapshot.empty) {
+                    return querySnapshot.docs[0].data();
                 }
                 return null;
             } catch (error) {
                 console.error("Erro ao verificar jogador no Firestore: ", error);
-                // Retornar null em caso de erro para permitir que o quiz continue (como um novo jogador)
-                // ou mostrar um erro mais específico para o usuário, dependendo da política.
-                // Por ora, um erro aqui pode bloquear o início do quiz, o que pode ser aceitável.
-                // startError.textContent = "Erro ao verificar dados. Tente novamente.";
-                return null; 
+                return null;
             }
         }
 
-        startButton.addEventListener('click', async () => { 
+        startButton.addEventListener('click', async () => {
             currentPlayerName = playerNameInput.value.trim();
             currentPlayerEmail = playerEmailInput.value.trim();
-            const selectedPlatformElement = document.querySelector('input[name="referral_platform"]:checked');
-            currentPlayerReferralPlatform = selectedPlatformElement ? selectedPlatformElement.value : '';
-            currentPlayerReferralHandle = referralHandleInput.value.trim();
-            currentPlayerMarketingConsent = marketingConsentCheckbox.checked; 
+            currentPlayerSocialMedia = playerSocialMediaInput.value.trim(); // Capturar rede social
+            const selectedSocialSourceRadio = document.querySelector('input[name="social-source"]:checked');
+            currentPlayerSocialSource = selectedSocialSourceRadio ? selectedSocialSourceRadio.value : ''; // Capturar origem
+            currentPlayerMarketingConsent = marketingConsentCheckbox.checked;
             startError.textContent = '';
-
 
             if (!currentPlayerName || !currentPlayerEmail) {
                 startError.textContent = 'Por favor, preencha o seu nome e email para concorrer.';
@@ -437,166 +607,156 @@
                 startError.textContent = 'Por favor, insira um email válido.';
                 return;
             }
-            // Plataforma de origem é agora obrigatória
-            if (!currentPlayerReferralPlatform) {
-                startError.textContent = 'Por favor, selecione onde ficou sabendo do quiz (Instagram ou TikTok).';
-                return;
-            }
-             if (currentPlayerReferralHandle && !currentPlayerReferralHandle.startsWith('@')) {
-                currentPlayerReferralHandle = '@' + currentPlayerReferralHandle;
+            if (currentPlayerSocialMedia && !currentPlayerSocialMedia.startsWith('@') && (currentPlayerSocialSource === 'Instagram' || currentPlayerSocialSource === 'TikTok')) {
+                 // Adicionar @ apenas se for uma rede que usualmente usa (opcional, pode remover essa lógica)
+                // currentPlayerSocialMedia = '@' + currentPlayerSocialMedia;
             }
 
-            const existingPlayerData = await checkIfPlayerExistsInFirestore(currentPlayerEmail); 
-            if (existingPlayerData) {
-                // Jogador já completou o quiz. Apenas atualiza informações se necessário e mostra o ranking.
-                let existingPlayerTime = existingPlayerData.totalQuizTimeMs ? (existingPlayerData.totalQuizTimeMs / 1000).toFixed(2) + "s" : "N/A";
-                alert(`Olá ${existingPlayerData.name}! Parece que você já completou este quiz e a sua pontuação foi ${existingPlayerData.score} (tempo: ${existingPlayerTime}). A sua participação já está registada! Você será direcionado(a) para o ranking.`);
-                
-                // Atualiza informações se mudaram (nome, refs, consentimento)
-                if (existingPlayerData.name !== currentPlayerName || 
-                    existingPlayerData.referralPlatform !== currentPlayerReferralPlatform ||
-                    existingPlayerData.referralHandle !== (currentPlayerReferralHandle || null) ||
-                    existingPlayerData.marketingConsent !== currentPlayerMarketingConsent) {
-                    
-                    const updatedInfo = {
-                        name: currentPlayerName,
-                        referralPlatform: currentPlayerReferralPlatform,
-                        referralHandle: currentPlayerReferralHandle || null,
-                        marketingConsent: currentPlayerMarketingConsent,
-                        lastActivityTimestamp: serverTimestamp()
-                    };
-                    try {
-                        await setDoc(doc(rankingsCollectionRef, currentPlayerEmail), updatedInfo, { merge: true });
-                        console.log("Informações (nome/origem/consentimento) atualizadas para:", currentPlayerEmail);
-                    } catch (error) {
-                        console.error("Erro ao atualizar informações do jogador:", error);
-                    }
+
+            const completedPlayerEntry = await checkIfPlayerPlayedInFirestore(currentPlayerEmail);
+            if (completedPlayerEntry) {
+                let existingPlayerTime = completedPlayerEntry.totalQuizTimeMs ? (completedPlayerEntry.totalQuizTimeMs / 1000).toFixed(2) + "s" : "N/A";
+                // Usar um modal customizado ou uma mensagem na tela em vez de alert
+                startError.textContent = `Olá ${completedPlayerEntry.name}! Você já completou o quiz (${completedPlayerEntry.score} pts, ${existingPlayerTime}). Sua participação está registrada. Veja o ranking.`;
+                // Atualizar dados se necessário (ex: consentimento, rede social)
+                if (completedPlayerEntry.marketingConsent !== currentPlayerMarketingConsent ||
+                    completedPlayerEntry.socialMedia !== currentPlayerSocialMedia ||
+                    completedPlayerEntry.socialSource !== currentPlayerSocialSource) {
+                    await saveRankingToFirestore(
+                        completedPlayerEntry.name,
+                        completedPlayerEntry.email,
+                        currentPlayerSocialMedia, // Passar nova rede social
+                        currentPlayerSocialSource, // Passar nova origem
+                        currentPlayerMarketingConsent,
+                        completedPlayerEntry.score,
+                        completedPlayerEntry.totalQuizTimeMs
+                    );
                 }
-                await displayRankingScreen(true, currentPlayerEmail); 
-                return; 
+                await displayRankingScreen(true, currentPlayerEmail);
+                return;
             }
-            
-            // Se não completou, verifica se há um quiz em progresso no localStorage
+
             const inProgressQuizState = loadQuizState(currentPlayerEmail);
             if (inProgressQuizState) {
                 console.log("DEBUG: Continuando quiz para", currentPlayerEmail);
-                // Restaura estado para continuar o quiz
-                currentPlayerName = inProgressQuizState.name; 
-                currentPlayerReferralPlatform = inProgressQuizState.referralPlatform;
-                currentPlayerReferralHandle = inProgressQuizState.referralHandle; 
-                currentPlayerMarketingConsent = inProgressQuizState.marketingConsent; 
+                currentPlayerName = inProgressQuizState.name;
+                currentPlayerSocialMedia = inProgressQuizState.socialMedia; // Carregar rede social
+                currentPlayerSocialSource = inProgressQuizState.socialSource; // Carregar origem
+                currentPlayerMarketingConsent = inProgressQuizState.marketingConsent;
                 currentQuestionIndex = inProgressQuizState.currentQuestionIndex;
                 score = inProgressQuizState.score;
                 userAnswers = inProgressQuizState.userAnswers;
-                quizAttemptStartTime = inProgressQuizState.quizAttemptStartTime; 
-                
+                quizStartTime = inProgressQuizState.quizStartTime;
+
                 playerNameInput.value = currentPlayerName;
-                if(currentPlayerReferralPlatform === "Instagram") document.getElementById('platform-instagram').checked = true;
-                if(currentPlayerReferralPlatform === "TikTok") document.getElementById('platform-tiktok').checked = true;
-                referralHandleInput.value = currentPlayerReferralHandle;
-                marketingConsentCheckbox.checked = currentPlayerMarketingConsent; 
+                playerSocialMediaInput.value = currentPlayerSocialMedia; // Preencher campo
+                if (currentPlayerSocialSource) { // Marcar radio button
+                    const radioToSelect = document.getElementById(`source-${currentPlayerSocialSource.toLowerCase()}`);
+                    if (radioToSelect) radioToSelect.checked = true;
+                }
+                marketingConsentCheckbox.checked = currentPlayerMarketingConsent;
+
 
                 startScreen.classList.add('hidden');
                 resultsScreen.classList.add('hidden');
                 rankingScreen.classList.add('hidden');
                 questionScreen.classList.remove('hidden');
-                
-                scoreDisplay.textContent = score; // Mostra o score acumulado da sessão
+
+                scoreDisplay.textContent = score;
                 totalQuestionsDisplay.textContent = quizData.length;
                 nextButton.textContent = 'Confirmar e Próxima';
-                showQuestion(); 
+                showQuestion();
             } else {
                 console.log("DEBUG: Iniciando novo quiz para", currentPlayerEmail);
-                startQuiz(); // Inicia um novo quiz do zero
+                startQuiz();
             }
         });
 
-        nextButton.addEventListener('click', handleNextQuestion); 
+        nextButton.addEventListener('click', handleNextQuestion);
 
-        showRankingButton.addEventListener('click', async () => { 
-             await displayRankingScreen(true, currentPlayerEmail); 
-        }); 
-        
+        showRankingButton.addEventListener('click', async () => {
+             await displayRankingScreen(true, currentPlayerEmail);
+        });
+
         backToStartButton.addEventListener('click', () => {
             rankingScreen.classList.add('hidden');
             startScreen.classList.remove('hidden');
-            // quizDayInfo.textContent = ''; // Removido pois não há mais "dias"
             clearPlayerInputs();
         });
 
         function clearPlayerInputs() {
             playerNameInput.value = '';
             playerEmailInput.value = '';
-            referralHandleInput.value = '';
-            const platformRadios = document.querySelectorAll('input[name="referral_platform"]');
-            platformRadios.forEach(radio => radio.checked = false);
-            marketingConsentCheckbox.checked = false; 
+            playerSocialMediaInput.value = ''; // Limpar campo de rede social
+            const socialSourceRadios = document.querySelectorAll('input[name="social-source"]');
+            socialSourceRadios.forEach(radio => radio.checked = false); // Desmarcar radios
+            marketingConsentCheckbox.checked = false;
             startError.textContent = '';
         }
-        
+
         function validateEmail(email) {
             const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             return re.test(String(email).toLowerCase());
         }
 
-        function startQuiz() { 
+        function startQuiz() {
             startScreen.classList.add('hidden');
             resultsScreen.classList.add('hidden');
             rankingScreen.classList.add('hidden');
             questionScreen.classList.remove('hidden');
-            
+
             currentQuestionIndex = 0;
-            score = 0; 
+            score = 0;
             userAnswers = [];
-            quizAttemptStartTime = Date.now(); 
-            totalQuizTimeMs = 0; 
+            quizStartTime = Date.now();
+            totalQuizTimeMs = 0;
             scoreDisplay.textContent = score;
             totalQuestionsDisplay.textContent = quizData.length;
             nextButton.textContent = 'Confirmar e Próxima';
 
-            saveQuizState(); 
+            saveQuizState();
             showQuestion();
         }
 
         function startQuestionTimer() {
-            questionTimeRemaining = MAX_QUESTION_TIME_SECONDS; 
-            questionStartTime = Date.now(); 
+            questionTimeRemaining = MAX_QUESTION_TIME_SECONDS;
+            questionStartTime = Date.now();
             timerBar.style.width = '100%';
-            timerBar.style.backgroundColor = '#F59E0B'; 
+            timerBar.style.backgroundColor = '#F59E0B';
 
-            clearInterval(questionTimerInterval); 
+            clearInterval(questionTimerInterval);
             questionTimerInterval = setInterval(() => {
                 const timePassed = (Date.now() - questionStartTime) / 1000;
                 questionTimeRemaining = MAX_QUESTION_TIME_SECONDS - timePassed;
-                
+
                 let widthPercentage = (questionTimeRemaining / MAX_QUESTION_TIME_SECONDS) * 100;
                 if (widthPercentage < 0) widthPercentage = 0;
                 timerBar.style.width = `${widthPercentage}%`;
 
-                if (questionTimeRemaining <= 15) { 
-                     timerBar.style.backgroundColor = '#EF4444'; 
-                } else if (questionTimeRemaining <= 30) { 
-                     timerBar.style.backgroundColor = '#FCD34D'; 
+                if (questionTimeRemaining <= 15) {
+                     timerBar.style.backgroundColor = '#EF4444';
+                } else if (questionTimeRemaining <= 30) {
+                     timerBar.style.backgroundColor = '#FCD34D';
                 }
 
 
                 if (questionTimeRemaining <= 0) {
                     clearInterval(questionTimerInterval);
-                    if (!selectedOptionButton) { 
-                         handleOptionSelection(false, quizData[currentQuestionIndex].answer, MAX_QUESTION_TIME_SECONDS); 
-                         handleNextQuestionLogic(); 
+                    if (!selectedOptionButton) {
+                         handleOptionSelection(false, quizData[currentQuestionIndex].answer, MAX_QUESTION_TIME_SECONDS);
+                         handleNextQuestionLogic();
                     }
                 }
-            }, 100); 
+            }, 100);
         }
 
         function showQuestion() {
             resetQuestionState();
-            const currentQuestion = quizData[currentQuestionIndex]; 
+            const currentQuestion = quizData[currentQuestionIndex];
             questionText.textContent = currentQuestion.question;
             questionNumberDisplay.textContent = currentQuestionIndex + 1;
             updateProgressBar();
-            startQuestionTimer(); 
+            startQuestionTimer();
 
             currentQuestion.options.forEach(optionText => {
                 const button = document.createElement('button');
@@ -607,46 +767,46 @@
                         selectedOptionButton.classList.remove('selected-option-highlight');
                     }
                     button.classList.add('selected-option-highlight');
-                    selectedOptionButton = button; 
-                    
+                    selectedOptionButton = button;
+
                     nextButton.classList.remove('opacity-50', 'cursor-not-allowed');
                     nextButton.disabled = false;
                 });
                 optionsContainer.appendChild(button);
             });
         }
-        
-        function handleOptionSelection(isCorrect, correctAnswerText, timeTakenSeconds) { 
+
+        function handleOptionSelection(isCorrect, correctAnswerText, timeTakenSeconds) {
             let questionPoints = 0;
-            let bonusPoints = 0; 
+            let bonusPoints = 0;
             let currentBonusFeedback = "";
 
-            const secondsSpent = Math.floor(timeTakenSeconds); 
+            const secondsSpent = Math.floor(timeTakenSeconds);
 
             if (isCorrect) {
-                questionPoints = 100; 
-                bonusPoints = Math.max(0, MAX_QUESTION_TIME_SECONDS - secondsSpent); 
+                questionPoints = 100;
+                bonusPoints = Math.max(0, MAX_QUESTION_TIME_SECONDS - secondsSpent);
                 currentBonusFeedback = `Correto! +${bonusPoints} pts de bónus (tempo: ${secondsSpent}s).`;
             } else {
                  currentBonusFeedback = selectedOptionButton ? "Incorreto." : "Tempo esgotado!";
-                 bonusPoints = 0; 
+                 bonusPoints = 0;
             }
-            
-            score += questionPoints + bonusPoints; 
+
+            score += questionPoints + bonusPoints;
             scoreDisplay.textContent = score;
             bonusFeedback.textContent = currentBonusFeedback;
 
              userAnswers.push({
                 question: quizData[currentQuestionIndex].question,
                 selected: selectedOptionButton ? selectedOptionButton.textContent : "Tempo esgotado",
-                correct: correctAnswerText, 
+                correct: correctAnswerText,
                 isCorrect: isCorrect,
-                pointsEarned: questionPoints + bonusPoints 
+                pointsEarned: questionPoints + bonusPoints
             });
         }
 
         function updateProgressBar() {
-            const progressPercentage = ((currentQuestionIndex) / quizData.length) * 100; 
+            const progressPercentage = ((currentQuestionIndex) / quizData.length) * 100;
             progressBar.style.width = `${progressPercentage}%`;
         }
 
@@ -654,50 +814,46 @@
             nextButton.classList.add('opacity-50', 'cursor-not-allowed');
             nextButton.disabled = true;
             bonusFeedback.textContent = '';
-            if (selectedOptionButton) {
-                selectedOptionButton.classList.remove('selected-option-highlight', 'answer-feedback-correct', 'answer-feedback-incorrect', 'answer-feedback-show-correct');
-                selectedOptionButton.classList.add('border-gray-300', 'bg-white'); 
-            }
-            selectedOptionButton = null; 
+            selectedOptionButton = null;
             while (optionsContainer.firstChild) {
                 optionsContainer.removeChild(optionsContainer.firstChild);
             }
         }
-        
+
         function handleNextQuestion() {
-            clearInterval(questionTimerInterval); 
+            clearInterval(questionTimerInterval);
             const timeTakenForQuestionSeconds = (Date.now() - questionStartTime) / 1000;
 
-            if (!selectedOptionButton && questionTimeRemaining > 0) { 
+            if (!selectedOptionButton && questionTimeRemaining > 0) {
                 bonusFeedback.textContent = "Por favor, selecione uma opção antes de confirmar.";
-                startQuestionTimer(); 
+                startQuestionTimer();
                 return;
             }
-            
+
             const currentQuestion = quizData[currentQuestionIndex];
-            const selectedAnswerText = selectedOptionButton ? selectedOptionButton.textContent : null; 
+            const selectedAnswerText = selectedOptionButton ? selectedOptionButton.textContent : null;
             const isCorrect = selectedAnswerText === currentQuestion.answer;
-            
-            handleOptionSelection(isCorrect, currentQuestion.answer, timeTakenForQuestionSeconds); 
+
+            handleOptionSelection(isCorrect, currentQuestion.answer, timeTakenForQuestionSeconds);
 
             Array.from(optionsContainer.children).forEach(button => {
                 button.disabled = true;
                 button.classList.remove('hover:bg-green-100', 'selected-option-highlight');
 
-                if (button === selectedOptionButton) { 
+                if (button === selectedOptionButton) {
                     if (isCorrect) {
                         button.classList.add('answer-feedback-correct');
                     } else {
                         button.classList.add('answer-feedback-incorrect');
                     }
-                } else if (button.textContent === currentQuestion.answer) { 
+                } else if (button.textContent === currentQuestion.answer) {
                     button.classList.add('answer-feedback-show-correct');
                 } else if (!selectedOptionButton && button.textContent === currentQuestion.answer) {
                      button.classList.add('answer-feedback-show-correct');
                 }
             });
-            
-            if (!selectedOptionButton && !isCorrect) { 
+
+            if (!selectedOptionButton && !isCorrect) {
                 Array.from(optionsContainer.children).forEach(button => {
                     if (button.textContent === currentQuestion.answer) {
                         if(!button.classList.contains('answer-feedback-show-correct') && !button.classList.contains('answer-feedback-correct')){
@@ -710,57 +866,49 @@
             }
             handleNextQuestionLogic();
         }
-        
-        function handleNextQuestionLogic() { 
+
+        function handleNextQuestionLogic() {
             currentQuestionIndex++;
             if (currentQuestionIndex < quizData.length) {
-                saveQuizState(); 
+                saveQuizState();
                 setTimeout(() => {
                     showQuestion();
-                }, 1800); 
+                }, 1800);
             } else {
-                progressBar.style.width = '100%'; 
-                totalQuizTimeMs = Date.now() - quizAttemptStartTime; 
+                progressBar.style.width = '100%';
+                totalQuizTimeMs = Date.now() - quizStartTime;
                 setTimeout(() => {
-                    showResults(); 
+                    showResults();
                 }, 1800);
             }
 
-             if (quizData.length === currentQuestionIndex) { 
+             if (quizData.length === currentQuestionIndex) {
                 nextButton.textContent = 'Ver Resultados';
-                nextButton.disabled = true; 
+                nextButton.disabled = true;
                 nextButton.classList.add('opacity-50', 'cursor-not-allowed');
             }
         }
 
-        async function showResults() { 
+        async function showResults() {
             questionScreen.classList.add('hidden');
             resultsScreen.classList.remove('hidden');
             rankingScreen.classList.add('hidden');
 
             resultPlayerName.textContent = currentPlayerName;
-            finalScoreDisplay.textContent = `${score}`; 
-            
-            await saveRankingToFirestore(
-                currentPlayerName, 
-                currentPlayerEmail, 
-                currentPlayerReferralPlatform, // Passa a plataforma
-                currentPlayerReferralHandle,   // Passa o @
-                currentPlayerMarketingConsent, 
-                score,  
-                totalQuizTimeMs
-            ); 
-            
-            clearQuizState(currentPlayerEmail); // Limpa o estado do localStorage após salvar no Firebase
+            finalScoreDisplay.textContent = `${score}`;
+
+            await saveRankingToFirestore(currentPlayerName, currentPlayerEmail, currentPlayerSocialMedia, currentPlayerSocialSource, currentPlayerMarketingConsent, score, totalQuizTimeMs);
+            clearQuizState(currentPlayerEmail);
 
             let message = "";
             const maxPossibleBaseScore = quizData.length * 100;
-            const maxPossibleBonusScore = quizData.length * MAX_QUESTION_TIME_SECONDS; 
+            const maxPossibleBonusScore = quizData.length * MAX_QUESTION_TIME_SECONDS;
             const maxPossibleTotalScore = maxPossibleBaseScore + maxPossibleBonusScore;
 
             const percentageOfMax = (score / maxPossibleTotalScore) * 100;
 
-            if (score === maxPossibleTotalScore) { 
+
+            if (score === maxPossibleTotalScore) {
                 message = "PERFEITO! Você gabaritou com bónus máximos! Um verdadeiro expert em sustentabilidade!";
             } else if (percentageOfMax >= 75) {
                 message = "Excelente! A sua pontuação é impressionante. Você entende muito de sustentabilidade!";
@@ -772,17 +920,17 @@
                 message = "Obrigado por participar! Aprender é o primeiro passo para um futuro mais verde e consciente.";
             }
             finalFeedbackMessage.textContent = message;
-            
+
             displayAnswersReviewForResults();
         }
 
         function displayAnswersReviewForResults() {
-            answersReviewDiv.innerHTML = ''; 
+            answersReviewDiv.innerHTML = '';
             userAnswers.forEach((answer, index) => {
                 const reviewItem = document.createElement('div');
                 reviewItem.classList.add('p-3', 'rounded-md', 'text-sm');
                 reviewItem.classList.add(answer.isCorrect ? 'correct-answer-review' : 'incorrect-answer-review');
-                
+
                 const questionP = document.createElement('p');
                 questionP.classList.add('font-semibold', 'text-gray-800');
                 questionP.textContent = `P${index + 1}: ${answer.question}`;
@@ -802,51 +950,50 @@
                 answersReviewDiv.appendChild(reviewItem);
             });
         }
-        
-        async function displayRankingScreen(show, highlightEmail = null) { 
+
+        async function displayRankingScreen(show, highlightEmail = null) {
             startScreen.classList.add('hidden');
             questionScreen.classList.add('hidden');
             resultsScreen.classList.add('hidden');
             rankingScreen.classList.remove('hidden');
 
-            rankingTableBody.innerHTML = '<tr><td colspan="5" class="text-center py-4">A carregar ranking...</td></tr>'; 
+            rankingTableBody.innerHTML = '<tr><td colspan="5" class="text-center py-4">A carregar ranking...</td></tr>';
             noRankingDataP.classList.add('hidden');
             document.getElementById('ranking-table-display').classList.remove('hidden');
 
             try {
                 const q = query(
-                    rankingsCollectionRef, 
-                    orderBy('score', 'desc'), 
-                    orderBy('totalQuizTimeMs', 'asc'), 
-                    orderBy('lastActivityTimestamp', 'asc'), // Alterado de 'timestamp'
+                    rankingsCollectionRef,
+                    orderBy('score', 'desc'),
+                    orderBy('totalQuizTimeMs', 'asc'),
+                    orderBy('timestamp', 'asc'),
                     limit(100)
                 );
                 const querySnapshot = await getDocs(q);
 
-                rankingTableBody.innerHTML = ''; 
+                rankingTableBody.innerHTML = '';
 
                 if (querySnapshot.empty) {
                     noRankingDataP.classList.remove('hidden');
                     document.getElementById('ranking-table-display').classList.add('hidden');
                 } else {
-                    querySnapshot.docs.forEach((doc, index) => { 
+                    querySnapshot.docs.forEach((doc, index) => {
                         const player = doc.data();
                         const row = rankingTableBody.insertRow();
                         if (highlightEmail && player.email === highlightEmail) {
                             row.classList.add('highlight-player');
                         }
-                        row.insertCell().textContent = (index + 1) + "º"; 
+                        row.insertCell().textContent = (index + 1) + "º";
                         row.insertCell().textContent = player.name;
-                        row.insertCell().textContent = player.score; 
+                        row.insertCell().textContent = player.score;
                         const totalTimeSeconds = player.totalQuizTimeMs ? (player.totalQuizTimeMs / 1000).toFixed(2) + "s" : "-";
                         row.insertCell().textContent = totalTimeSeconds;
-                        // A data aqui pode ser a 'date' que já salvamos, ou formatar 'lastActivityTimestamp'
-                        row.insertCell().textContent = player.date; 
+                        row.insertCell().textContent = player.date;
                     });
                 }
             } catch (error) {
                 console.error("Erro ao carregar ranking do Firestore: ", error);
-                rankingTableBody.innerHTML = '<tr><td colspan="5" class="text-center py-4 text-red-500">Erro ao carregar o ranking.</td></tr>'; 
+                rankingTableBody.innerHTML = '<tr><td colspan="5" class="text-center py-4 text-red-500">Erro ao carregar o ranking.</td></tr>';
             }
         }
 
