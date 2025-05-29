@@ -105,7 +105,7 @@
                 <input type="text" id="player-social-media" placeholder="Sua Rede Social Favorita (@usuario)" class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent">
             </div>
             <div class="mb-4 text-left">
-                <label class="block text-sm font-medium text-gray-700 mb-1">De onde você veio?</label>
+                <label class="block text-sm font-medium text-gray-700 mb-1">De onde você veio? <span class="text-red-500">*</span></label>
                 <div class="flex items-center space-x-4">
                     <div>
                         <input type="radio" id="source-instagram" name="social-source" value="Instagram" class="h-4 w-4 text-green-600 border-gray-300 focus:ring-green-500">
@@ -605,6 +605,11 @@
             }
             if (!validateEmail(currentPlayerEmail)) {
                 startError.textContent = 'Por favor, insira um email válido.';
+                return;
+            }
+            // Tornar a seleção da origem da rede social obrigatória
+            if (!currentPlayerSocialSource) {
+                startError.textContent = 'Por favor, selecione de onde você veio (Instagram ou TikTok).';
                 return;
             }
             if (currentPlayerSocialMedia && !currentPlayerSocialMedia.startsWith('@') && (currentPlayerSocialSource === 'Instagram' || currentPlayerSocialSource === 'TikTok')) {
